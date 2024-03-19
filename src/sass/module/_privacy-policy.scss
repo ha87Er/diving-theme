@@ -1,0 +1,39 @@
+@use 'global' as *;
+
+.privacy-policy__inner.inner{
+    max-width: calc(rem(600) + rem(15)*2);
+    width: 100%;
+    margin: auto;
+    padding: 0 rem(15);
+
+    @include mq('md'){
+        max-width: calc(rem(800) + rem(25)*2);
+        width: 100%;
+        margin: auto;
+        padding: 0 rem(25);
+    }
+}
+
+.privacy-policy__title{
+    color: $font-color;
+    font-size: rem(24);
+    font-weight: 500;
+
+    @include mq('md'){
+        font-size: rem(32);
+    }
+}
+
+.privacy-policy__wrap{
+    margin-top: rem(40);
+}
+
+.privacy-policy__text{
+    color: $font-color;
+    font-size: rem(16);
+    line-height: 32px;
+}
+
+.privacy-policy__content{
+    margin-top: 2em;
+}

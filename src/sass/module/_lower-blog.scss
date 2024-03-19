@@ -1,0 +1,13 @@
+@use 'global' as *;
+
+.two-column__inner.inner{
+    max-width: calc(rem(600) + rem(15)*2);
+
+    @include mq('md'){
+        max-width: calc(rem(1080) + rem(25)*2);
+
+    }
+}
+
+
+

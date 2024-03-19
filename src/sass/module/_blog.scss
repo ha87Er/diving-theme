@@ -1,0 +1,56 @@
+@use 'global' as *;
+
+.blog{
+    position: relative;
+}
+
+.blog::before{
+
+    @include mq('md'){
+        content: "";
+        width: 100%;
+        height: rem(500);
+        background: url(../images/common/blog_bg.jpg)no-repeat center center / cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
+}
+
+.blog::after{
+
+    @include mq('md'){
+                content: "";
+                display: block;
+                width: rem(437);
+                height: rem(201);
+                position: absolute;
+                top: rem(23);
+                left: calc(50% - min(48vW, rem(620)));
+                background: url(../images/common/accent_fish1.svg) no-repeat center center / contain;
+    }
+}
+
+.blog__inner{
+    padding: 0 rem(15);
+    max-width: calc(rem(600) + rem(30));
+}
+
+.blog__items{
+    margin-top: rem(28);
+
+    @include mq('md'){
+        margin-top: rem(80);
+    }
+}
+
+.blog__button{
+    margin-top: rem(40);
+    text-align: center;
+
+    @include mq('md'){
+    margin-top: rem(85);
+    }
+}

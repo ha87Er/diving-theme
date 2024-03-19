@@ -1,0 +1,67 @@
+@use 'global' as *;
+
+.title{
+    text-align: center;
+}
+
+.title__en{
+    color: $font-color;
+    font-family: $third-font-family;
+    font-size: rem(32);
+    font-weight: $normal;
+    text-align: center;
+    line-height: 40px;
+
+    @include mq('md'){
+        font-size: rem(40);
+    }
+}
+
+.title__en::first-letter{
+    color: $accent-color;
+}
+
+.title__ja{
+    display: block;
+    text-align: center;
+    color: $accent-color;
+    margin-top: rem(4);
+    font-family: $base-font-family;
+    font-size: rem(12);
+
+    @include mq('md'){
+        margin-top: rem(7);
+    }
+}
+
+//色違いのタイトル
+.title__en.title__en--white{
+
+    @include mq('md'){
+        color: $white;
+    }
+}
+
+.title__en--white::first-letter{
+    
+    @include mq('md'){
+        color: $white;
+    }
+}
+
+.title__ja.title__ja--white{
+
+    @include mq('md'){
+        color: $white;
+    }
+}
+
+//サイズ違いのタイトル
+.title__en.title__en--large{
+    font-size: rem(80);
+    line-height: 0.8;
+}
+
+.title__ja.title__ja--large{
+    margin-top: 0;
+}

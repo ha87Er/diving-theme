@@ -1,0 +1,83 @@
+@use 'global' as *;
+
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table__title{
+    color: $white;
+    font-size: rem(16);
+    font-weight: $bold;
+    line-height: 24px;
+    background-color: $accent-color;
+    border: 1px solid $accent-color;
+    padding: rem(7) 0;
+    width: 100%;
+
+    @include mq('sm'){
+        width: 28.571%;
+    }
+}
+
+.table__title p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(8);
+
+    @include mq('sm'){
+        flex-direction: column-reverse;
+    }
+
+}
+
+.table__title img{
+    width: rem(24);
+    height: rem(24);
+
+    @include mq('sm'){
+        width: rem(64);
+        height: rem(64);
+    }
+}
+
+.table__menu,
+.table__price{
+    color: $font-color;
+    text-align: center;
+    font-size: rem(16);
+    line-height: 24px;
+    font-weight: $normal;
+    font-family: $base-font-family;
+    border: 1px solid $accent-color;
+    padding: rem(8) rem(16);
+    
+    @include mq('sm'){
+        padding: rem(17) rem(16);
+    }
+
+}
+
+.table__menu{
+    width: 70%;
+    
+
+    @include mq('sm'){
+        width: 48.571%;
+        text-align: left;
+    }
+}
+
+.table__price{
+    width: 30%;
+    text-align: right;
+    padding-right: rem(16);
+    text-indent: rem(12);
+
+    @include mq('sm'){
+        width: 22.875%;
+    }
+}

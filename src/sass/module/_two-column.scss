@@ -1,0 +1,37 @@
+@use 'global' as *;
+
+.two-column__inner.inner{
+    max-width: calc(rem(600) + rem(15)*2);
+
+    @include mq('md'){
+        max-width: calc(rem(1080) + rem(25)*2);
+    }
+}
+
+.two-column__wrap{
+
+    @include mq('md'){
+        display: flex;
+        gap: rem(80);
+    }
+}
+
+.two-column__main{
+
+    @include mq('md'){
+        width: calc(100% - rem(380));
+    }
+}
+
+
+.two-column__side{
+    max-width: calc(rem(600) + rem(25)*2);
+    margin: rem(80) auto 0;
+    padding: 0 rem(25);
+
+    @include mq('md'){
+        max-width: rem(294);
+        margin: 0 auto;
+        padding: 0;
+    }
+}

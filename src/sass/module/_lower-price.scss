@@ -1,0 +1,18 @@
+@use 'global' as *;
+
+.lower-price__inner.inner{
+    max-width: calc(rem(600) + rem(15) * 2);
+
+    @include mq('md'){
+        max-width: calc(rem(700) + rem(25)*2);
+
+    }
+}
+
+.lower-price__items table:not(:first-child){
+    margin-top: rem(40);
+
+    @include mq('md'){
+        margin-top: rem(80);
+    }
+}

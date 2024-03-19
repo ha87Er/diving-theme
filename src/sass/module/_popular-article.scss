@@ -1,0 +1,9 @@
+@use 'global' as *;
+
+.popular-article__cards{
+    margin-top: rem(25);
+}
+
+.popular-article__card:not(:first-child){
+    margin-top: rem(24);
+}

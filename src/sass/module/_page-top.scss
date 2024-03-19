@@ -1,0 +1,29 @@
+@use 'global' as *;
+
+.pagetop {
+    position: fixed;
+    right: rem(13);
+    bottom: rem(9);
+    width: min(calc(52 / 375 * 100%), rem(52));
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 20;
+
+    @include mq('md'){
+        right: rem(18);
+        bottom: rem(14);
+        width: rem(84);
+    }
+    /*footerまでスクロールしたら消す*/
+    &.is-show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /*footerまでスクロールしたら消す*/
+    &.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+  }
