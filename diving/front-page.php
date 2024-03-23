@@ -249,44 +249,39 @@
       <h2 class="title__ja">お客様の声</h2>
     </div>
     <div class="voice__items voice-items">
+
+    <?php
+      $args = array(
+          'post_type'      => 'voice_category', // カスタム投稿タイプのスラッグを指定
+          'posts_per_page' => 2, // 表示する投稿の数
+          'orderby'        => 'date', // 日付で並び替える
+          'order'          => 'DESC', // 降順で並び替える
+      );
+
+      $custom_query = new WP_Query( $args );
+
+      while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
       <div class="voice-items__item voice-item">
         <div class="voice-item__head">
           <div class="voice-item__content">
             <div class="voice-item__meta">
-              <p class="voice-item__age">20代(女性)</p>
-              <div class="voice-item__tag">ライセンス講習</div>
+              <p class="voice-item__age"><?php the_field('voice_1'); ?></p>
+              <div class="voice-item__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?></div>
             </div>
-            <h3 class="voice-item__title">ここにタイトルが入ります。ここにタイトル</h3>
+            <h3 class="voice-item__title"><?php the_title(); ?></h3>
           </div>
           <div class="voice-item__image colorbox inview">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/voice_img1.jpg" alt="麦わら帽子を被った女性">
+          <?php if(get_the_post_thumbnail()): ?>
+                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+                <?php endif; ?>
           </div>
         </div>
         <div class="voice-item__body">
-          <p class="voice-item__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。</p>
+          <p class="voice-item__text"><?php the_field('voice_2'); ?></p>
         </div>
       </div>
-      <div class="voice-items__item voice-item">
-        <div class="voice-item__head">
-          <div class="voice-item__content">
-            <div class="voice-item__meta">
-              <p class="voice-item__age">20代(女性)</p>
-              <div class="voice-item__tag">ファンダイビング</div>
-            </div>
-            <h3 class="voice-item__title">ここにタイトルが入ります。ここにタイトル</h3>
-          </div>
-          <div class="voice-item__image colorbox inview">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/voice_img2.jpg" alt="麦わら帽子をグッドのポーズをする男性被った女性">
-          </div>
-        </div>
-        <div class="voice-item__body">
-          <p class="voice-item__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。</p>
-        </div>
-      </div>
+      <?php endwhile;
+      wp_reset_postdata(); ?>
     </div>
     <div class="voice__button">
       <a href="./archive-voice.html" class="button">
@@ -313,18 +308,15 @@
         <div class="price-list__item">
           <h3 class="price-list__title">ライセンス講習</h3>
           <dl class="price-list__description">
+          <?php
+          $price = SCF::get('license');
+          foreach ($price as $fields) {
+          ?>
             <div class="price-list__wrap">
-              <dt class="price-list__menu">オープンウォーターダイバーコース</dt>
-              <dd class="price-list__price">¥50,000</dd>
+              <dt class="price-list__menu"><?php echo $fields['menu']; ?></dt>
+              <dd class="price-list__price"><?php echo nl2br($fields['price']); ?></dd>
             </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">アドバンスドオープンウォーターコース</dt>
-              <dd class="price-list__price">¥60,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">レスキュー＋EFRコース</dt>
-              <dd class="price-list__price">¥70,000</dd>
-            </div>
+            <?php } ?>
           </dl>
         </div>
         <div class="price-list__item">
@@ -388,43 +380,6 @@
       <a href="./page-price.html" class="button">
         <span>View more</span>
       </a>
-    </div>
-  </div>
-</section>
-
-<section class="contact layout-contact">
-  <div class="contact__inner inner">
-    <div class="contact__block">
-      <div class="contact__information">
-        <div class="contact__information-title">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo-green.svg" alt="CodeUps">
-        </div>
-        <div class="contact__row-wrap">
-          <div class="contact__description">
-            <p class="contact__address">沖縄県那覇市1-1</p>
-            <p class="contact__tel"><a href="tel:0120-000-0000">TEL:0120-000-0000</a></p>
-            <p class="contact__sales">営業時間:8:30-19:00</p>
-            <p class="contact__holiday">定休日:毎週火曜日</p>
-          </div>
-          <div class="contact__map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.3799814610384!2d127.71739497508827!3d26.216840277068698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e56bfe6cf4db67%3A0xc0899fbab29e4f8b!2z6aaW6YeM5Z-O!5e0!3m2!1sja!2sjp!4v1705631042528!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-        </div>
-      </div>
-      <div class="contact__content">
-        <div class="contact__content-wrap">
-          <div class="contact__title">
-            <div class="title__en title__en--large">Contact</div>
-            <h2 class="title__ja title__ja--large">お問い合わせ</h2>
-          </div>
-          <p class="contact__text">ご予約・お問い合わせはコチラ</p>
-          <div class="contact__button">
-            <a href="./page-contact.html" class="button">
-              <span>Contact us</span>
-            </a>
-          </div>
-       </div>
-      </div>
     </div>
   </div>
 </section>

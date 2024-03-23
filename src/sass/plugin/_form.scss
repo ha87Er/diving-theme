@@ -75,18 +75,13 @@ textarea {
 	// 	border: 1px solid $border-cr;
 	// }
 	/*↓↓選択されているときの色*/
-	&:focus {
-		border: rem(2) solid $border-cr;
-	}
+	// &:focus {
+	// 	border: rem(2) solid $border-cr;
+	// }
 
-	&:hover{
-		border: rem(2) solid $border-cr;
-	}
-
-    &.is-error{
-        border: rem(1) solid #C94800;
-        background: rgba(201, 72, 0, 0.20);
-    }
+	// &:hover{
+	// 	border: rem(2) solid $border-cr;
+	// }
 
 	@include mq('md'){
 		font-size: rem(16);
@@ -102,10 +97,10 @@ input::placeholder {
 //   max-width: rem(200);
   width: 100%;
 
-  &:hover{
-    border: rem(2) solid $border-cr;
+//   &:hover{
+//     border: rem(2) solid $border-cr;
 
-}
+// }
 }
 
 /*----- ラジオボタンのスタイル ------*/
@@ -164,11 +159,11 @@ input::placeholder {
 		}
 	}
 
-	&:hover + span{
-		&::before{
-            border:	rem(1) solid $border-cr;
-        }
-	}
+	// &:hover + span{
+	// 	&::before{
+    //         border:	rem(1) solid $border-cr;
+    //     }
+	// }
 }
 
 /*----- チェックボックスのスタイル ------*/
@@ -208,12 +203,10 @@ input::placeholder {
 			width: $check-size;
 			height: $check-size;
 			display: block;
-			transition: border 0.3s;
 		}
 
 		&::after {
 			opacity: 0;
-			transition: 0.3s ease;
 		}
 	}
 
@@ -241,18 +234,18 @@ input::placeholder {
 		}
 	}
 
-	&:focus + span {
-		&::before{
-		border:	rem(2) solid $border-cr;
+	// &:focus + span {
+	// 	&::before{
+	// 	border:	rem(2) solid $border-cr;
 
-		}
-	}
+	// 	}
+	// }
 
-	&:hover + span{
-		&::before{
-            border:	rem(2) solid $border-cr;
-        }
-	}
+	// &:hover + span{
+	// 	&::before{
+    //         border:	rem(2) solid $border-cr;
+    //     }
+	// }
 }
 
 /*----- セレクトボックスのスタイル ------*/
@@ -277,14 +270,14 @@ select {
 	/*↓デフォルトではないアイコンを使う場合は入力する*/
 	background: url(../images/common/polygon.svg)no-repeat center right 9px /12px 10px;
     
-	&:focus {
-        background-color: $back-cr;
-		border: rem(2) solid $border-cr;
-	}
+	// &:focus {
+    //     background-color: $back-cr;
+	// 	border: rem(2) solid $border-cr;
+	// }
 
-	&:hover {
-		border: rem(2) solid $border-cr;
-	}
+	// &:hover {
+	// 	border: rem(2) solid $border-cr;
+	// }
 
 	@include mq('md'){
 		font-size: rem(16);
@@ -300,9 +293,9 @@ select {
 	// background-image: url();
 	// background-position: right 12px center;
 	// background-repeat: no-repeat;
-	&:focus {
-		border: 1px solid $border-cr;
-	}
+	// &:focus {
+	// 	border: 1px solid $border-cr;
+	// }
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -325,12 +318,96 @@ textarea {
 		font-size: rem(16);
 	}
 
-    &:focus {
-		border: rem(2) solid $border-cr;
+    // &:focus {
+	// 	border: rem(2) solid $border-cr;
 
-    }
+    // }
 
-	&:hover {
-		border: rem(2) solid $border-cr;
-	}
+	// &:hover {
+	// 	border: rem(2) solid $border-cr;
+	// }
 }
+
+/*----- 送信ボタン ------*/
+[type="button"],
+[type="submit"] {
+	/*↓リセットCSS */
+	margin: 0;
+	background-image: none;
+	width: auto;
+	display: inline-block;
+	text-decoration: none;
+	border: none;
+	border-radius: 0;
+	/*↓カスタム */
+    color: $white;
+
+}
+
+/* ボタンをホバーしたときのスタイル */
+button:hover [type="button"],
+button:hover [type="submit"]{
+    color: $accent-color;
+}
+
+span.wpcf7-spinner {
+	display: none;
+  }
+
+
+//エラー表示
+input.is-error {
+border: 1px solid #c94800;
+background: rgba(201, 72, 0, 0.2);
+}
+
+input.is-error::placeholder {
+color: #fff;
+}
+
+textarea.is-error {
+border: 1px solid #c94800;
+background: rgba(201, 72, 0, 0.2);
+}
+
+.wpcf7-list-item-label.is-error {
+background: rgba(201, 72, 0, 0.2);
+}
+
+[type=checkbox].is-error + span::before {
+border: 1px solid #c94800;
+background: rgba(201, 72, 0, 0.2);
+}
+
+// .wpcf7-not-valid-tip{
+// 	display: none;
+// }
+
+// .wpcf7-response-output{
+// 	display: none;
+// }
+
+// .wpcf7-form.sent .wpcf7-response-output {
+// 	display: none;
+//   }
+
+// .wpcf7-form-control{
+
+
+// 	&.is-error {
+// 	   .wpcf7-not-valid,
+// 	   .list-item-label,
+// 	   .list-item-label::before{
+// 		border: 1px solid #c94800;
+// 		background: rgba(201, 72, 0, 0.2);
+// 	  }
+
+// 	  .wpcf7-not-valid::placeholder{
+// 		color: #fff;
+// 	  }
+// 	}
+// }
+
+// input:-internal-autofill-selected{
+// 	background-color: #fff;
+// }

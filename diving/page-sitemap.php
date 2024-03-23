@@ -10,7 +10,7 @@
   </div>
 
   <!-- パンくず -->
-  <?php get_template_part('./parts/breadcrumb') ?>
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <div class="sitemap layout-sitemap">
     <div class="sitemap__inner lower-inner inner">

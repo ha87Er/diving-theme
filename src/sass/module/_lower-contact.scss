@@ -12,3 +12,14 @@
         padding: 0 rem(25);
     }
 }
+
+.lower-contact__error-message{
+    display: none;
+    color: #C94800;
+    font-size: rem(14);
+    text-align: center;
+}
+
+.lower-contact__error-message.is-error{
+    display: block;
+}

@@ -10,12 +10,12 @@
 </div>
 
 <!-- パンくず -->
-<?php get_template_part('./parts/breadcrumb') ?>
+<?php get_template_part('parts/breadcrumb') ?>
 
 <div class="contact-thanks layout-contact-thanks">
   <div class="contact-thanks__inner lower-inner inner">
     <div class="contact-thanks__content">
-      <h2 class="contact-thanks__title">お問い合わせ内容を送信完了しました。</h2>
+    <h2 class="contact-thanks__title">お問い合わせ内容を送信完了しました。</h2>
       <p class="contact-thanks__text">
         このたびは、お問い合わせ頂き<br class="u-mobile">誠にありがとうございます。<br>
         お送り頂きました内容を確認の上、<br class="u-mobile">3営業日以内に折り返しご連絡させて頂きます。<br>

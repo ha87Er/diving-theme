@@ -256,23 +256,33 @@ jQuery(function ($) {
   });
 
   //日付のスライド
-  jQuery(document).ready(function () {
-    // 最初の要素を開いた状態にする
-    jQuery(".archive__year:first").parent().addClass("is-open");
-    jQuery(".archive__year:first").next().slideDown();
+jQuery(document).ready(function () {
+  // 最初の要素を開いた状態にする
+  jQuery(".archive__month-wrap").slideUp();
+  jQuery(".archive__year").addClass("is-open");
+  jQuery(".archive__year").next('.archive__month-wrap').slideDown();
 
-    // クリックしたときの処理
-    jQuery(".archive__year").on("click", function (e) {
-      e.preventDefault();
-      if (jQuery(this).parent().hasClass("is-open")) {
-        jQuery(this).parent().removeClass("is-open");
-        jQuery(this).next().slideUp();
-      } else {
-        jQuery(this).parent().addClass("is-open");
-        jQuery(this).next().slideDown();
-      }
-    });
+  // クリックしたときの処理
+  jQuery(".archive__year").on("click", function (e) {
+    e.preventDefault();
+
+    // クリックされた要素内の.month-wrapを取得
+    var $monthWrap = jQuery(this).next('.archive__month-wrap');
+
+    if ($monthWrap.is(":visible")) {
+      $monthWrap.slideUp();
+      // クリックした要素に is-open クラスを削除して:beforeのスタイルを変更する
+      jQuery(this).removeClass('is-open');
+    } else {
+      // 他の.month-wrapを閉じる
+      jQuery(".archive__month-wrap").slideUp();
+      $monthWrap.slideDown();
+      // クリックした要素に is-open クラスを追加して:beforeのスタイルを変更する
+      jQuery(this).addClass('is-open');
+    }
   });
+});
+
 
   //パラメーターの設定
   $(function () {
@@ -308,4 +318,39 @@ jQuery(function ($) {
       }
     });
   });
+});
+
+
+jQuery(function ($) {
+// フォーム送信時のバリデーション
+$(function(){
+    $('.button--form').on('submit', function(event) {
+        var error = false;
+
+        // エラーメッセージを初期化
+        $(this).find('.is-error').removeClass('is-error');
+
+        // 必須項目の検証
+        $(this).find('.wpcf7-validates-as-required').each(function(){
+          console.log($(this).val().trim()); // 値をログに出力して確認
+            if($(this).val().trim() === ""){
+                error = true;
+                // 値が取得できない場合はエラーメッセージを表示
+                $(this).addClass('is-error');
+            }
+        });
+
+        // 送信ボタンの制御
+        if (error) {
+            event.preventDefault(); // エラーがある場合はフォームの送信を中止
+            $('.lower-contact__error-message').addClass('is-error'); // エラーメッセージの表示
+        }
+    });
+});
+
+// メールが正常に送信された場合の処理
+document.addEventListener('wpcf7mailsent', function(event){
+  location.href = '/contact/thanks/'; // サンクスページに遷移
+}, false);
+
 });

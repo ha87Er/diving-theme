@@ -389,7 +389,7 @@ a {
 	width: 1.5rem;
 }
 
-.archive__data.is-open .archive__year::before {
+.archive__year.is-open::before {
 	transform: translateY(-50%) rotate(0deg);
 }
 
@@ -769,6 +769,7 @@ a {
 }
 
 .button.button--form {
+	margin: auto;
 	padding: 1rem 3.625rem 1rem 3.5rem;
 }
 
@@ -1827,6 +1828,17 @@ div.colorbox img {
 	width: 100%;
 }
 
+.lower-contact__error-message {
+	color: #C94800;
+	display: none;
+	font-size: 0.875rem;
+	text-align: center;
+}
+
+.lower-contact__error-message.is-error {
+	display: block;
+}
+
 .lower-information__inner.inner {
 	margin: auto;
 	max-width: 39.375rem;
@@ -2797,43 +2809,6 @@ textarea {
 	width: 100%; /*↓↓↓↓不要ならコメントアウト or 削除 */ /*↓↓選択されているときの色*/
 }
 
-[type=text]:focus,
-[type=search]:focus,
-[type=tel]:focus,
-[type=url]:focus,
-[type=email]:focus,
-[type=tel]:focus,
-[type=password]:focus,
-[type=date]:focus,
-textarea:focus {
-	border: 0.125rem solid #408F95;
-}
-
-[type=text]:hover,
-[type=search]:hover,
-[type=tel]:hover,
-[type=url]:hover,
-[type=email]:hover,
-[type=tel]:hover,
-[type=password]:hover,
-[type=date]:hover,
-textarea:hover {
-	border: 0.125rem solid #408F95;
-}
-
-[type=text].is-error,
-[type=search].is-error,
-[type=tel].is-error,
-[type=url].is-error,
-[type=email].is-error,
-[type=tel].is-error,
-[type=password].is-error,
-[type=date].is-error,
-textarea.is-error {
-	background: rgba(201, 72, 0, 0.2);
-	border: 0.0625rem solid #C94800;
-}
-
 input::-moz-placeholder {
 	color: #DDF0F1;
 }
@@ -2846,10 +2821,6 @@ input::placeholder {
 
 [type=tel] {
 	width: 100%;
-}
-
-[type=tel]:hover {
-	border: 0.125rem solid #408F95;
 }
 
 /*----- ラジオボタンのスタイル ------*/
@@ -2901,10 +2872,6 @@ input::placeholder {
 	width: 0.5rem;
 }
 
-[type=radio]:hover + span::before {
-	border: 0.0625rem solid #408F95;
-}
-
 /*----- チェックボックスのスタイル ------*/
 
 [type=checkbox] {
@@ -2937,13 +2904,11 @@ input::placeholder {
 	left: -0.0625rem;
 	position: absolute;
 	top: 0.1875rem;
-	transition: border 0.3s;
 	width: 1rem;
 }
 
 [type=checkbox] + span::after {
 	opacity: 0;
-	transition: 0.3s ease;
 }
 
 [type=checkbox]:checked + span::after {
@@ -2958,14 +2923,6 @@ input::placeholder {
 	top: 0.4375rem; /*チェックマークじゃない場合は以下を変更する*/
 	transform: rotate(-45deg);
 	width: 9px; /*backgroundでチェックマークを再現*/
-}
-
-[type=checkbox]:focus + span::before {
-	border: 0.125rem solid #408F95;
-}
-
-[type=checkbox]:hover + span::before {
-	border: 0.125rem solid #408F95;
 }
 
 /*----- セレクトボックスのスタイル ------*/
@@ -2986,15 +2943,6 @@ select { /*↓デフォルトのアイコンを消す場合はコメントアウ
 	width: 100%;
 }
 
-select:focus {
-	background-color: #fff;
-	border: 0.125rem solid #408F95;
-}
-
-select:hover {
-	border: 0.125rem solid #408F95;
-}
-
 /*----- 日付のスタイル ------*/
 
 [type=date] { /*↓デフォルトのアイコンを消す場合はコメントアウト（noneにする）*/
@@ -3002,10 +2950,6 @@ select:hover {
 	-moz-appearance: auto;
 	appearance: auto;
 	position: relative; /*↓デフォルトではないアイコンを使う場合は入力する*/
-}
-
-[type=date]:focus {
-	border: 1px solid #408F95;
 }
 
 input[type=date]::-webkit-calendar-picker-indicator {
@@ -3025,12 +2969,57 @@ textarea {
 	width: 100%;
 }
 
-textarea:focus {
-	border: 0.125rem solid #408F95;
+/*----- 送信ボタン ------*/
+
+[type=button],
+[type=submit] {
+	-webkit-text-decoration: none;
+	background-image: none;
+	border: none;
+	border-radius: 0; /*↓カスタム */
+	color: #fff;
+	display: inline-block; /*↓リセットCSS */
+	margin: 0;
+	text-decoration: none;
+	width: auto;
 }
 
-textarea:hover {
-	border: 0.125rem solid #408F95;
+/* ボタンをホバーしたときのスタイル */
+
+button:hover [type=button],
+button:hover [type=submit] {
+	color: #408F95;
+}
+
+span.wpcf7-spinner {
+	display: none;
+}
+
+input.is-error {
+	background: rgba(201, 72, 0, 0.2);
+	border: 1px solid #c94800;
+}
+
+input.is-error::-moz-placeholder {
+	color: #fff;
+}
+
+input.is-error::placeholder {
+	color: #fff;
+}
+
+textarea.is-error {
+	background: rgba(201, 72, 0, 0.2);
+	border: 1px solid #c94800;
+}
+
+.wpcf7-list-item-label.is-error {
+	background: rgba(201, 72, 0, 0.2);
+}
+
+[type=checkbox].is-error + span::before {
+	background: rgba(201, 72, 0, 0.2);
+	border: 1px solid #c94800;
 }
 
 @media screen and (min-width: 600px) {

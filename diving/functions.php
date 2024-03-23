@@ -34,3 +34,62 @@ function my_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'my_setup' );
+
+// メニューを動的にする
+function register_my_menus() {
+    register_nav_menus(array(
+        'main' => 'メインメニュー',
+        'footer' => 'フッターメニュー',
+    ));
+}
+add_action('after_setup_theme', 'register_my_menus');
+
+// wp_nav_menuのliにclass追加
+function add_additional_class_on_li($classes, $item, $args)
+{
+  if (isset($args->add_li_class)) {
+    $classes['class'] = $args->add_li_class;
+  }
+  return $classes;
+}
+add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
+
+// wp_nav_menuのaにclass追加
+function add_additional_class_on_a($classes, $item, $args)
+{
+  if (isset($args->add_li_class)) {
+    $classes['class'] = $args->add_a_class;
+  }
+  return $classes;
+}
+add_filter('nav_menu_link_attributes', 'add_additional_class_on_a', 1, 3);
+
+// Contact Form 7で自動挿入されるPタグ、brタグを削除
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false() {
+  return false;
+}
+
+// Contact Form 7 セレクトボックスの選択肢をタクソノミーのターム一覧から自動生成
+add_filter('do_shortcode_tag', function ($output, $tag, $attr) {
+  if ('contact-form-7' === $tag || 'contact-form' === $tag) {
+
+      $id   = 'de1dbad';                // コンタクトフォームの ID
+      $name = 'menu-925';     // セレクトボックスの名前
+      $tax  = 'campaign_category'; // タクソノミーのスラッグ
+
+      if ($id == $attr['id']) {
+          $terms = get_terms($tax, array('hide_empty' => false));
+          if (!empty($terms) && !is_wp_error($terms)) {
+              $options = '<option value="">キャンペーンを選択</option>';
+              foreach ($terms as $term) {
+                  $options .= '<option value="' . esc_attr($term->name) . '">' . esc_html($term->name) . '</option>';
+              }
+              $output = preg_replace('/(<select .*?name="' . $name . '".*?>)(.*?)(<\/select>)/i', '${1}' . $options . '${3}', $output);
+          }
+      }
+  }
+  return $output;
+}, 10, 3);
+
+
