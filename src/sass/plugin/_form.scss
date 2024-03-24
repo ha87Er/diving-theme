@@ -356,28 +356,28 @@ span.wpcf7-spinner {
 
 
 //エラー表示
-input.is-error {
-border: 1px solid #c94800;
-background: rgba(201, 72, 0, 0.2);
-}
+// input.is-error {
+// border: 1px solid #c94800;
+// background: rgba(201, 72, 0, 0.2);
+// }
 
-input.is-error::placeholder {
-color: #fff;
-}
+// input.is-error::placeholder {
+// color: #fff;
+// }
 
-textarea.is-error {
-border: 1px solid #c94800;
-background: rgba(201, 72, 0, 0.2);
-}
+// textarea.is-error {
+// border: 1px solid #c94800;
+// background: rgba(201, 72, 0, 0.2);
+// }
 
-.wpcf7-list-item-label.is-error {
-background: rgba(201, 72, 0, 0.2);
-}
+// .wpcf7-list-item-label.is-error {
+// background: rgba(201, 72, 0, 0.2);
+// }
 
-[type=checkbox].is-error + span::before {
-border: 1px solid #c94800;
-background: rgba(201, 72, 0, 0.2);
-}
+// [type=checkbox].is-error + span::before {
+// border: 1px solid #c94800;
+// background: rgba(201, 72, 0, 0.2);
+// }
 
 // .wpcf7-not-valid-tip{
 // 	display: none;
@@ -411,3 +411,28 @@ background: rgba(201, 72, 0, 0.2);
 // input:-internal-autofill-selected{
 // 	background-color: #fff;
 // }
+
+
+//エラー表示
+input.wpcf7-not-valid,
+textarea.wpcf7-not-valid{
+	border: 1px solid #c94800;
+	background: rgba(201, 72, 0, 0.2);
+}
+
+input.wpcf7-not-valid::placeholder{
+	color: #fff;
+}
+
+.wpcf7-not-valid [type=checkbox] + span::before{
+	border: 1px solid #c94800;
+	background: rgba(201, 72, 0, 0.2);
+}
+
+//エラーメッセージ
+.wpcf7 form.invalid .wpcf7-response-output{
+	border: none;
+	text-align: center;
+	color: #C94800;
+    font-size: rem(14);
+}

@@ -321,36 +321,70 @@ jQuery(document).ready(function () {
 });
 
 
-jQuery(function ($) {
-// フォーム送信時のバリデーション
-$(function(){
-    $('.button--form').on('submit', function(event) {
-        var error = false;
+// jQuery(function ($) {
+// // フォーム送信時のバリデーション
+// $(function(){
+//     $('.button--form').on('submit', function(event) {
+//         var error = false;
 
-        // エラーメッセージを初期化
-        $(this).find('.is-error').removeClass('is-error');
+//         // エラーメッセージを初期化
+//         $(this).find('.is-error').removeClass('is-error');
 
-        // 必須項目の検証
-        $(this).find('.wpcf7-validates-as-required').each(function(){
-          console.log($(this).val().trim()); // 値をログに出力して確認
-            if($(this).val().trim() === ""){
-                error = true;
-                // 値が取得できない場合はエラーメッセージを表示
-                $(this).addClass('is-error');
-            }
-        });
+//         // 必須項目の検証
+//         $(this).find('.wpcf7-not-valid').each(function(){
+//           console.log($(this).val().trim()); // 値をログに出力して確認
+//             if($(this).val().trim() === ""){
+//                 error = true;
+//                 // 値が取得できない場合はエラーメッセージを表示
+//                 $(this).addClass('is-error');
+//             }
+//         });
 
-        // 送信ボタンの制御
-        if (error) {
-            event.preventDefault(); // エラーがある場合はフォームの送信を中止
-            $('.lower-contact__error-message').addClass('is-error'); // エラーメッセージの表示
-        }
-    });
-});
+//         // 送信ボタンの制御
+//         if (error) {
+//             event.preventDefault(); // エラーがある場合はフォームの送信を中止
+//             $('.lower-contact__error-message').addClass('is-error'); // エラーメッセージの表示
+//         }
+//     });
+// });
 
-// メールが正常に送信された場合の処理
-document.addEventListener('wpcf7mailsent', function(event){
-  location.href = '/contact/thanks/'; // サンクスページに遷移
-}, false);
+// // メールが正常に送信された場合の処理
+// document.addEventListener('wpcf7mailsent', function(event){
+//   location.href = '/contact/thanks/'; // サンクスページに遷移
+// }, false);
 
-});
+// });
+
+// jQuery(function ($) {
+//   // フォーム送信時のバリデーション
+//   $(function(){
+//       $('.button--form').on('submit', function(event) {
+//           var error = false;
+
+//           // エラーメッセージを初期化
+//           $(this).find('.is-error').removeClass('is-error');
+
+//           // 必須項目の検証
+//           $(this).find('.wpcf7-not-valid').each(function(){
+//               if($(this).val().trim() === ""){
+//                   error = true;
+//                   // 値が取得できない場合はエラーメッセージを表示
+//                   $(this).addClass('is-error');
+//               }
+//           });
+
+//           // 送信ボタンの制御
+//           if (error) {
+//               event.preventDefault(); // エラーがある場合はフォームの送信を中止
+
+//               // エラーがあるフォームに背景色を変更
+//               $(this).find('.wpcf7-not-valid').addClass('invalid-field');
+//           }
+//       });
+//   });
+
+//   // メールが正常に送信された場合の処理
+//   document.addEventListener('wpcf7mailsent', function(event){
+//     location.href = '/contact/thanks/'; // サンクスページに遷移
+//   }, false);
+// });

@@ -2995,31 +2995,30 @@ span.wpcf7-spinner {
 	display: none;
 }
 
-input.is-error {
+input.wpcf7-not-valid,
+textarea.wpcf7-not-valid {
 	background: rgba(201, 72, 0, 0.2);
 	border: 1px solid #c94800;
 }
 
-input.is-error::-moz-placeholder {
+input.wpcf7-not-valid::-moz-placeholder {
 	color: #fff;
 }
 
-input.is-error::placeholder {
+input.wpcf7-not-valid::placeholder {
 	color: #fff;
 }
 
-textarea.is-error {
+.wpcf7-not-valid [type=checkbox] + span::before {
 	background: rgba(201, 72, 0, 0.2);
 	border: 1px solid #c94800;
 }
 
-.wpcf7-list-item-label.is-error {
-	background: rgba(201, 72, 0, 0.2);
-}
-
-[type=checkbox].is-error + span::before {
-	background: rgba(201, 72, 0, 0.2);
-	border: 1px solid #c94800;
+.wpcf7 form.invalid .wpcf7-response-output {
+	border: none;
+	color: #C94800;
+	font-size: 0.875rem;
+	text-align: center;
 }
 
 @media screen and (min-width: 600px) {
