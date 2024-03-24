@@ -100,11 +100,19 @@
                   <li class="nav__item nav__item--bold"><a href="<?php echo $voice; ?>">お客様の声</a></li>
                 </ul>
                 <ul class="nav__items">
+                <?php if (is_page('page-price')) : ?>
+                  <li class="nav__item nav__item--bold"><a href="<?php echo $price; ?>">料金一覧</a></li>
+                  <li class="nav__item"><a href="#license">ライセンス講習</a></li>
+                  <li class="nav__item"><a href="#experience">体験ダイビング</a></li>
+                  <li class="nav__item"><a href="#fan">ファンダイビング</a></li>
+                  <li class="nav__item"><a href="#special">スペシャルダイビング</a></li>
+                <?php else : ?>
                   <li class="nav__item nav__item--bold"><a href="<?php echo $price; ?>">料金一覧</a></li>
                   <li class="nav__item"><a href="<?php echo $price1; ?>">ライセンス講習</a></li>
                   <li class="nav__item"><a href="<?php echo $price2; ?>">体験ダイビング</a></li>
                   <li class="nav__item"><a href="<?php echo $price3; ?>">ファンダイビング</a></li>
                   <li class="nav__item"><a href="<?php echo $price4; ?>">スペシャルダイビング</a></li>
+                <?php endif; ?>
                 </ul>
               </div>
               <div class="nav__wrap">

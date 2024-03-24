@@ -1828,17 +1828,6 @@ div.colorbox img {
 	width: 100%;
 }
 
-.lower-contact__error-message {
-	color: #C94800;
-	display: none;
-	font-size: 0.875rem;
-	text-align: center;
-}
-
-.lower-contact__error-message.is-error {
-	display: block;
-}
-
 .lower-information__inner.inner {
 	margin: auto;
 	max-width: 39.375rem;
@@ -2995,30 +2984,38 @@ span.wpcf7-spinner {
 	display: none;
 }
 
-input.wpcf7-not-valid,
-textarea.wpcf7-not-valid {
-	background: rgba(201, 72, 0, 0.2);
-	border: 1px solid #c94800;
-}
-
-input.wpcf7-not-valid::-moz-placeholder {
-	color: #fff;
-}
-
-input.wpcf7-not-valid::placeholder {
-	color: #fff;
-}
-
-.wpcf7-not-valid [type=checkbox] + span::before {
-	background: rgba(201, 72, 0, 0.2);
-	border: 1px solid #c94800;
-}
-
 .wpcf7 form.invalid .wpcf7-response-output {
 	border: none;
 	color: #C94800;
 	font-size: 0.875rem;
 	text-align: center;
+}
+
+.wpcf7-form-control-wrap .wpcf7-not-valid-tip {
+	display: none;
+}
+
+.wpcf7-form-control-wrap.is-error .wpcf7-not-valid-tip {
+	display: block;
+}
+
+.wpcf7-form-control-wrap.is-error input.wpcf7-not-valid,
+.wpcf7-form-control-wrap.is-error textarea.wpcf7-not-valid {
+	background: rgba(201, 72, 0, 0.2);
+	border: 1px solid #c94800;
+}
+
+.wpcf7-form-control-wrap.is-error input.wpcf7-not-valid::-moz-placeholder {
+	color: #fff;
+}
+
+.wpcf7-form-control-wrap.is-error input.wpcf7-not-valid::placeholder {
+	color: #fff;
+}
+
+.wpcf7-form-control-wrap.is-error .wpcf7-not-valid [type=checkbox] + span::before {
+	background: rgba(201, 72, 0, 0.2);
+	border: 1px solid #c94800;
 }
 
 @media screen and (min-width: 600px) {

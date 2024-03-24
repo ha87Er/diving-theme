@@ -14,9 +14,8 @@
 
 <div class="lower-contact layout-lower-contact">
   <div class="lower-contact__inner lower-inner inner">
-    <p class="lower-contact__error-message">※必須項目が入力されていません。入力してください。</p>
       <div class="lower-contact__form contact-form">
-        <?php echo do_shortcode('[contact-form-7 id="de1dbad" title="コンタクトフォーム 1"]'); ?>
+        <?php echo do_shortcode('[contact-form-7 id="de1dbad" title="お問い合わせ html_id="form""]'); ?>
       </div>
   </div>
 </div>
