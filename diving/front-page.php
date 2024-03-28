@@ -24,34 +24,44 @@
       <h1 class="main-title__title">DIVING</h1>
       <p class="main-title__sub-title">into the ocean</p>
     </div>
+    <?php
+      $top_slider = SCF::get_option_meta('top_slider');
+      $top_slider_group = $top_slider['top_slider_group'];
+      if (!empty($top_slider_group)) :
+      ?>
     <div class="swiper mv__swiper js-mv-swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
+
+        <?php foreach ($top_slider_group as $item) :
+        //画像
+        $top_img_pc_id = $item['top_slider_img_pc'];
+        $top_img_pc_src = wp_get_attachment_url($top_img_pc_id);
+        $top_img_sp_id = $item['top_slider_img_sp'];
+        $top_img_sp_src = wp_get_attachment_url($top_img_sp_id);
+
+        //alt
+        $alt_pc = get_post_meta($top_img_pc_id, '_wp_attachment_image_alt', true);
+
+        //テキスト
+        $top_slider_text = $item['top_slider_text'];
+
+        //ボタンリンク
+        $top_slider_link = $item['top_slider_link'];
+      ?>
+      <div class="swiper-slide">
           <div class="mv__image">
             <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_pc1.jpg" media="(min-width: 768px)" type="image/png">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_sp1.jpg" alt="海で泳ぐ２人ダイバーがウミガメと遭遇">
+              <source srcset="<?php echo $top_img_pc_src;?>" media="(min-width: 768px)" type="image/png">
+              <img src="<?php echo $top_img_sp_src;?>" alt="<?php echo $alt_pc;?>">
             </picture>
           </div>
         </div>
-        <div class="swiper-slide">
-          <div class="mv__image">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_pc2.jpg" media="(min-width: 768px)" type="image/png">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_sp2.jpg" alt="山のが見える海外沿いで運行する船">
-            </picture>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="mv__image">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_pc3.jpg" media="(min-width: 768px)" type="image/png">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/main-view_sp3.jpg" alt="透明度が高い美しい海">
-            </picture>
-          </div>
-        </div>
+        <?php endforeach; ?>
+
       </div>
     </div>
+
+    <?php endif; ?>
   </div>
  </section>
 
@@ -67,66 +77,37 @@
     </div>
     <div class="swiper campaign__swiper js-campaign-swiper">
       <div class="swiper-wrapper campaign__cards">
+      <?php
+      $args = array(
+          'post_type'      => 'campaign', // カスタム投稿タイプのスラッグを指定
+          'posts_per_page' => 5, // 表示する投稿の数
+          'orderby'        => 'date', // 日付で並び替える
+          'order'          => 'DESC', // 降順で並び替える
+      );
+
+      $custom_query = new WP_Query( $args );
+
+      while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
         <div class="swiper-slide campaign__card campaign-card">
-          <div class="campaign-card__image">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img1.jpg" alt="水槽に黄色と黒の縞模様の熱帯魚がたくさん泳いでいる">
-          </div>
+          <?php if(get_the_post_thumbnail()): ?>
+              <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+          <?php endif; ?>
           <div class="campaign-card__body">
-            <div><p class="campaign-card__tag">ライセンス講習</p></div>
-            <div class="campaign-card__title">ライセンス取得</div>
+            <div><p class="campaign-card__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'campaign_category')[0]->name); ?></p></div>
+            <div class="campaign-card__title"><?php the_title(); ?></div>
             <p class="campaign-card__text">全部コミコミ(お一人様)</p>
             <div class="campaign-card__price">
-              <p class="campaign-card__price-before">¥56,000</p>
-              <p class="campaign-card__price-after">¥46,000</p>
+              <p class="campaign-card__price-before"><?php the_field('campaign_1'); ?></p>
+              <p class="campaign-card__price-after"><?php the_field('campaign_2'); ?></p>
             </div>
           </div>
         </div>
-        <div class="swiper-slide campaign__card campaign-card">
-          <div class="campaign-card__image">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img2.jpg" alt="山が見える透明度が高い綺麗な海に船が２隻浮かんでいる">
-          </div>
-          <div class="campaign-card__body">
-            <div><p class="campaign-card__tag">体験ダイビング</p></div>
-            <div class="campaign-card__title">貸切体験ダイビング</div>
-            <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-            <div class="campaign-card__price">
-              <p class="campaign-card__price-before">¥24,000</p>
-              <p class="campaign-card__price-after">¥18,000</p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide campaign__card campaign-card">
-          <div class="campaign-card__image">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img3.jpg" alt="たくさんのクラゲが照明の暗い水槽を泳いでいる">
-          </div>
-          <div class="campaign-card__body">
-            <div><p class="campaign-card__tag">体験ダイビング</p></div>
-            <div class="campaign-card__title">ナイトダイビング</div>
-            <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-            <div class="campaign-card__price">
-              <p class="campaign-card__price-before">¥10,000</p>
-              <p class="campaign-card__price-after">¥8,000</p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide campaign__card campaign-card">
-          <div class="campaign-card__image">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img4.jpg" alt="仲間たちとダイビングをする姿">
-          </div>
-          <div class="campaign-card__body">
-            <div><p class="campaign-card__tag">ファンダイビング</p></div>
-            <div class="campaign-card__title">貸切ファンダイビング</div>
-            <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-            <div class="campaign-card__price">
-              <p class="campaign-card__price-before">¥20,000</p>
-              <p class="campaign-card__price-after">¥16,000</p>
-            </div>
-          </div>
-        </div>
+        <?php endwhile;
+      wp_reset_postdata(); ?>
       </div>
     </div>
     <div class="campaign__button">
-      <a href="./archive-campaign.html" class="button">
+      <a href="<?php echo esc_url(home_url('/campaign/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>
@@ -152,7 +133,7 @@
       <div class="about__text-block">
         <p class="about__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。</p>
         <div class="about__button">
-          <a href="./page-about.html" class="button">
+          <a href="<?php echo esc_url(home_url('/about/')) ?>" class="button">
             <span>View more</span>
           </a>
         </div>
@@ -178,7 +159,7 @@
           正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。
         </p>
         <div class="information__button">
-          <a href="./page-information.html" class="button">
+          <a href="<?php echo esc_url(home_url('/information/')) ?>" class="button">
             <span>View more</span>
           </a>
         </div>
@@ -194,48 +175,38 @@
       <h2 class="title__ja title__ja--white">ブログ</h2>
     </div>
     <div class="blog__items blog-items">
-      <a href="./single.html" class="blog-items__item blog-item">
+      <?php
+        $args = array(
+            'post_type'      => 'post', // ポストタイプを指定
+            'posts_per_page' => 3, // 表示する投稿の数
+            'orderby'        => 'date', // 日付で並び替える
+            'order'          => 'DESC', // 降順で並び替える
+        );
+
+        $custom_query = new WP_Query( $args );
+
+        while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
+      <a href="<?php the_permalink(); ?>" class="blog-items__item blog-item">
         <div class="blog-item__image">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog_img1.jpg" alt="赤色の珊瑚礁">
+            <?php if (has_post_thumbnail()): ?>
+              <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+            <?php else: ?>
+              <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
+            <?php endif; ?>
         </div>
         <div class="blog-item__body">
-          <time class="blog-item__date" datetime="2023-11-17">2023.11/17</time>
-          <h3 class="blog-item__text-title">ライセンス取得</h3>
+          <time class="blog-item__date" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
+          <h3 class="blog-item__text-title"><?php the_title(); ?></h3>
           <p class="blog-item__text">
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
+            <?php the_excerpt(); ?>
           </p>
         </div>
       </a>
-      <a href="./single.html" class="blog-items__item blog-item">
-        <div class="blog-item__image">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog_img2.jpg" alt="海の中を泳ぐウミガメ">
-        </div>
-        <div class="blog-item__body">
-          <time class="blog-item__date" datetime="2023-11-17">2023.11/17</time>
-          <h3 class="blog-item__text-title">ウミガメと泳ぐ</h3>
-          <p class="blog-item__text">
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-          </p>
-        </div>
-      </a>
-      <a href="./single.html" class="blog-items__item blog-item">
-        <div class="blog-item__image">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog_img3.jpg" alt="珊瑚礁に隠れるカクレクマノミ">
-        </div>
-        <div class="blog-item__body">
-          <time class="blog-item__date" datetime="2023-11-17">2023.11/17</time>
-          <h3 class="blog-item__text-title">カクレクマノミ</h3>
-          <p class="blog-item__text">
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-          </p>
-        </div>
-      </a>
+      <?php endwhile;
+      wp_reset_postdata(); ?>
     </div>
     <div class="blog__button">
-      <a href="./home.html" class="button">
+      <a href="<?php echo esc_url(home_url('/blog/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>
@@ -252,7 +223,7 @@
 
     <?php
       $args = array(
-          'post_type'      => 'voice_category', // カスタム投稿タイプのスラッグを指定
+          'post_type'      => 'voice', // カスタム投稿タイプのスラッグを指定
           'posts_per_page' => 2, // 表示する投稿の数
           'orderby'        => 'date', // 日付で並び替える
           'order'          => 'DESC', // 降順で並び替える
@@ -284,7 +255,7 @@
       wp_reset_postdata(); ?>
     </div>
     <div class="voice__button">
-      <a href="./archive-voice.html" class="button">
+      <a href="<?php echo esc_url(home_url('/voice/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>
@@ -309,75 +280,74 @@
           <h3 class="price-list__title">ライセンス講習</h3>
           <dl class="price-list__description">
           <?php
-          $price = SCF::get('license');
-          foreach ($price as $fields) {
+              $license = SCF::get('license', 12);
+              if (!empty($license)) {
+                  foreach ($license as $fields) { ?>
+                      <div class="price-list__wrap">
+                          <dt class="price-list__menu"><?php echo $fields['menu']; ?></dt>
+                          <dd class="price-list__price"><?php echo $fields['price']; ?></dd>
+                      </div>
+          <?php
+                  }
+              }
           ?>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu"><?php echo $fields['menu']; ?></dt>
-              <dd class="price-list__price"><?php echo nl2br($fields['price']); ?></dd>
-            </div>
-            <?php } ?>
           </dl>
         </div>
         <div class="price-list__item">
           <h3 class="price-list__title">体験ダイビング</h3>
           <dl class="price-list__description">
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ビーチ体験ダイビング(半日)</dt>
-              <dd class="price-list__price">¥7,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ビーチ体験ダイビング(1日)</dt>
-              <dd class="price-list__price">¥14,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ボート体験ダイビング(半日)</dt>
-              <dd class="price-list__price">¥10,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ボート体験ダイビング(1日)</dt>
-              <dd class="price-list__price">¥18,000</dd>
-            </div>
+          <?php
+              $trial = SCF::get('trail-diving', 12);
+              if (!empty($trial)) {
+                  foreach ($trial as $fields) { ?>
+                      <div class="price-list__wrap">
+                          <dt class="price-list__menu"><?php echo $fields['menu2']; ?></dt>
+                          <dd class="price-list__price"><?php echo $fields['price2']; ?></dd>
+                      </div>
+          <?php
+                  }
+              }
+          ?>
           </dl>
         </div>
         <div class="price-list__item">
           <h3 class="price-list__title">ファンダイビング</h3>
           <dl class="price-list__description">
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ビーチダイビング(2ダイブ)</dt>
-              <dd class="price-list__price">¥14,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ボートダイビング(2ダイブ)</dt>
-              <dd class="price-list__price">¥18,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">スペシャルダイビング(2ダイブ)</dt>
-              <dd class="price-list__price">¥24,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">ナイトダイビング(1ダイブ)</dt>
-              <dd class="price-list__price">¥10,000</dd>
-            </div>
+          <?php
+              $fan = SCF::get('fan-diving', 12);
+              if (!empty($fan)) {
+                  foreach ($fan as $fields) { ?>
+                      <div class="price-list__wrap">
+                          <dt class="price-list__menu"><?php echo $fields['menu3']; ?></dt>
+                          <dd class="price-list__price"><?php echo $fields['price3']; ?></dd>
+                      </div>
+          <?php
+                  }
+              }
+          ?>
           </dl>
         </div>
         <div class="price-list__item">
           <h3 class="price-list__title">スペシャルダイビング</h3>
           <dl class="price-list__description">
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">貸切ダイビング(2ダイブ)</dt>
-              <dd class="price-list__price">¥24,000</dd>
-            </div>
-            <div class="price-list__wrap">
-              <dt class="price-list__menu">1日ダイビング(3ダイブ)</dt>
-              <dd class="price-list__price">¥32,000</dd>
-            </div>
+          <?php
+              $special = SCF::get('special', 12);
+              if (!empty($special)) {
+                  foreach ($special as $fields) { ?>
+                      <div class="price-list__wrap">
+                          <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
+                          <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
+                      </div>
+          <?php
+                  }
+              }
+          ?>
           </dl>
         </div>
       </div>
     </div>
     <div class="price__button">
-      <a href="./page-price.html" class="button">
+      <a href="<?php echo esc_url(home_url('/price/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>

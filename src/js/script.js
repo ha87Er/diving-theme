@@ -20,7 +20,7 @@ $(".js-hamburger").on("click", function (e) {
 });
 
 // spナビクリックしたらドロワーが閉じる
-$(".js-drawer a[href^='#']").on("click", function (e) {
+$("a").on("click", function (e) {
   $(".js-hamburger").removeClass("is-active");
   $(".js-drawer").removeClass("is-active");
   $(".js-header").removeClass("is-open");
@@ -42,7 +42,7 @@ $(".js-drawer-close").on("click", function (e) {
 //メインビジュアル スライダー
 const mainVisualSwiper = new Swiper('.js-mv-swiper', {
     loop: true,
-    effect: 'fade',  
+    effect: 'fade', 
     speed: 2500, // ループの時間
     allowTouchMove: false, // スワイプ無効
     autoplay: {
@@ -247,21 +247,49 @@ jQuery(".js-accordion").on("click", function (e) {
 });
 
 //日付のスライド
-jQuery(document).ready(function() {
+// jQuery(document).ready(function() {
+//   // 最初の要素を開いた状態にする
+//   jQuery(".archive__year:first").parent().addClass("is-open");
+//   jQuery(".archive__year:first").next().slideDown();
+
+//   // クリックしたときの処理
+//   jQuery(".archive__year").on("click", function (e) {
+//     e.preventDefault();
+
+//     if (jQuery(this).parent().hasClass("is-open")) {
+//       jQuery(this).parent().removeClass("is-open");
+//       jQuery(this).next().slideUp();
+//     } else {
+//       jQuery(this).parent().addClass("is-open");
+//       jQuery(this).next().slideDown();
+//     }
+//   });
+// });
+
+ //日付のスライド
+ jQuery(document).ready(function () {
   // 最初の要素を開いた状態にする
-  jQuery(".archive__year:first").parent().addClass("is-open");
-  jQuery(".archive__year:first").next().slideDown();
+  jQuery(".archive__month-wrap").slideUp();
+  jQuery(".archive__year").addClass("is-open");
+  jQuery(".archive__year").next('.archive__month-wrap').slideDown();
 
   // クリックしたときの処理
   jQuery(".archive__year").on("click", function (e) {
     e.preventDefault();
 
-    if (jQuery(this).parent().hasClass("is-open")) {
-      jQuery(this).parent().removeClass("is-open");
-      jQuery(this).next().slideUp();
+    // クリックされた要素内の.month-wrapを取得
+    var $monthWrap = jQuery(this).next('.archive__month-wrap');
+
+    if ($monthWrap.is(":visible")) {
+      $monthWrap.slideUp();
+      // クリックした要素に is-open クラスを削除して:beforeのスタイルを変更する
+      jQuery(this).removeClass('is-open');
     } else {
-      jQuery(this).parent().addClass("is-open");
-      jQuery(this).next().slideDown();
+      // 他の.month-wrapを閉じる
+      jQuery(".archive__month-wrap").slideUp();
+      $monthWrap.slideDown();
+      // クリックした要素に is-open クラスを追加して:beforeのスタイルを変更する
+      jQuery(this).addClass('is-open');
     }
   });
 });
@@ -300,6 +328,11 @@ $('.js-tab-switch').on('click', function() {
 });
 
 });
+
+  //送信ボタンを押した時のみバリデーションメッセージ表示
+  jQuery(".button--form").click(function () {
+    jQuery(".wpcf7-form-control-wrap").addClass("is-error");
+  });
 
 
 });

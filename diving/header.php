@@ -28,7 +28,7 @@
       $home = esc_url(home_url('/'));
       $campaign = esc_url(home_url('/campaign/'));
       $campaign1 = esc_url(home_url('/campaign_category/fan-diving'));
-      $campaign2 = esc_url(home_url('/campaign_category/license/'));
+      $campaign2 = esc_url(home_url('/campaign_category/license'));
       $campaign3 = esc_url(home_url('/campaign_category/trial-diving'));
       $about = esc_url(home_url('/about/'));
       $information = esc_url(home_url('/information/'));

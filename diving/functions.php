@@ -65,3 +65,92 @@ add_filter('do_shortcode_tag', function ($output, $tag, $attr) {
 }, 10, 3);
 
 
+//抜粋文の表示
+// ↓ 抜粋の文字数を変更する
+function change_excerpt_length($length)
+{
+    return 80;  //変更する文字数
+}
+add_filter('excerpt_length', 'change_excerpt_length', 999);
+
+// ↓ 抜粋文の最後の文字列[…]を変更する
+function change_excerpt_more($more)
+{
+    return '……';  //変更後の文字列
+}
+add_filter('excerpt_more', 'change_excerpt_more');
+
+// 抜粋機能の有効化
+add_post_type_support('page', 'excerpt');
+
+//TOPスライダー設定
+/**
+ * @param string $page_title ページのtitle属性値 (必須)
+ * @param string $menu_title 管理画面のメニューに表示するタイトル (必須)
+ * @param string $capability メニューを操作できる権限 (必須)
+ * @param string $menu_slug オプションページのスラッグ (必須)
+ * @param string|null $icon_url メニューに表示するアイコンの URL
+ * @param int $position メニューの位置
+ */
+SCF::add_options_page( 'TOPスライダー', 'TOPスライダー', 'edit_posts', 'top_slider' , 'dashicons-admin-generic' , 11);
+
+/**
+ * カスタムフィールドを定義
+ * 
+ * @param array  $settings  MW_WP_Form_Setting オブジェクトの配列
+ * @param string $type      投稿タイプ or ロール
+ * @param int    $id        投稿ID or ユーザーID
+ * @param string $meta_type post | user
+ * @return array
+ * 
+ */
+function my_add_meta_box($settings, $type, $id, $meta_type)
+{
+  if ('top_slider' == $type) {
+    $setting = SCF::add_setting('id-top_slider', 'TOPスライダー設定');
+    $items = array(
+      array(
+        'type'        => 'image', //*タイプ
+        'name'        => 'top_slider_img_pc', //*名前
+        'label'       => '【PC】スライダー画像', //ラベル
+        'size'        => 'medium' // プレビューサイズ
+      ),
+      array(
+        'type'        => 'image', //*タイプ
+        'name'        => 'top_slider_img_sp', //*名前
+        'label'       => '【SP】スライダー画像', //ラベル
+        'size'        => 'medium' // プレビューサイズ
+      ),
+      array(
+        'type'        => 'textarea',                      // タイプ
+        'name'        => 'top_slider_text',                   // 名前
+        'label'       => 'スライダーテキスト設定',        // ラベル
+        'rows'        => 3,                               // 行数
+      ),
+      array(
+        'type'        => 'text', //*タイプ
+        'name'        => 'top_slider_link', //*名前
+        'label'       => 'リンク設定', //ラベル
+      ),
+    );
+    $setting->add_group('top_slider_group', true, $items);
+    $settings[] = $setting;
+  }
+  return $settings;
+}
+add_filter('smart-cf-register-fields', 'my_add_meta_box', 10, 4);
+
+//アーカイブの表示件数変更
+function change_posts_per_page($query) {
+    if ( is_admin() || ! $query->is_main_query() )
+        return;
+
+    if ( $query->is_archive('campaign') ) { //カスタム投稿タイプを指定
+        $query->set( 'posts_per_page', '4' ); //表示件数を指定
+    }
+
+    if ( $query->is_archive('voice') ) { //カスタム投稿タイプを指定
+        $query->set( 'posts_per_page', '6' ); //表示件数を指定
+    }
+}
+add_action( 'pre_get_posts', 'change_posts_per_page' );

@@ -16,7 +16,7 @@
   <div class="lower-price__inner lower-inner inner">
     <div class="lower-price__items">
       <!-- ライセンス講習 -->
-      <table data-id="#licence" id="licence" class="lower-price__table table">
+      <table data-id="#license" id="license" class="lower-price__table table">
         <tbody class="table__body">
           <tr>
             <th class="table__title">
@@ -24,8 +24,8 @@
             </th>
           </tr>
           <?php
-          $price = SCF::get('license');
-          foreach ($price as $fields) {
+          $price1 = SCF::get('license');
+          foreach ($price1 as $fields) {
           ?>
           <tr>
             <td class="table__menu"><?php echo $fields['menu']; ?></td>
@@ -43,12 +43,12 @@
             </th>
           </tr>
           <?php
-          $price = SCF::get('trail-diving');
-          foreach ($price as $fields) {
+          $price2 = SCF::get('trail-diving');
+          foreach ($price2 as $fields) {
           ?>
           <tr>
-            <td class="table__menu"><?php echo $fields['menu']; ?></td>
-            <td class="table__price"><?php echo nl2br($fields['price']); ?></td>
+            <td class="table__menu"><?php echo $fields['menu2']; ?></td>
+            <td class="table__price"><?php echo nl2br($fields['price2']); ?></td>
           </tr>
           <?php } ?>
         </tbody>
@@ -62,12 +62,12 @@
             </th>
           </tr>
           <?php
-          $price = SCF::get('trail-diving');
-          foreach ($price as $fields) {
+          $price3 = SCF::get('fan-diving');
+          foreach ($price3 as $fields) {
           ?>
           <tr>
-            <td class="table__menu"><?php echo $fields['menu']; ?></td>
-            <td class="table__price"><?php echo nl2br($fields['price']); ?></td>
+            <td class="table__menu"><?php echo $fields['menu3']; ?></td>
+            <td class="table__price"><?php echo nl2br($fields['price3']); ?></td>
           </tr>
           <?php } ?>
         </tbody>
@@ -81,12 +81,12 @@
             </th>
           </tr>
           <?php
-          $price = SCF::get('special-diving');
-          foreach ($price as $fields) {
+          $special = SCF::get('special');
+          foreach ($special as $fields) {
           ?>
           <tr>
-            <td class="table__menu"><?php echo $fields['menu']; ?></td>
-            <td class="table__price"><?php echo nl2br($fields['price']); ?></td>
+            <td class="table__menu"><?php echo $fields['menu4']; ?></td>
+            <td class="table__price"><?php echo nl2br($fields['price4']); ?></td>
           </tr>
           <?php } ?>
         </tbody>

@@ -7,3 +7,7 @@
 .layout-breadcrumb.layout-breadcrumb--white{
     margin-top: 0;
 }
+
+.error404 .breadcrumb-trail a {
+    color: white; /* 好みの色に変更してください */
+}

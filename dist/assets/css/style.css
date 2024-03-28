@@ -162,6 +162,10 @@ a {
 	margin-top: 0;
 }
 
+.error404 .breadcrumb-trail a {
+	color: white; /* 好みの色に変更してください */
+}
+
 .layout-campaign {
 	margin-top: 2.5rem;
 }
@@ -2716,6 +2720,11 @@ div.colorbox img {
 	width: 2.375rem;
 }
 
+.wp-pagenavi .previouspostslink,
+.wp-pagenavi .nextpostslink {
+	font-weight: 400;
+}
+
 .wp-pagenavi a:hover {
 	background: #408F95;
 	border-color: #408F95;
@@ -2733,34 +2742,6 @@ div.colorbox img {
 
 .wp-pagenavi .nextpostslink {
 	margin-left: 1.75rem;
-}
-
-.wp-pagenavi .previouspostslink:before {
-	border-bottom: 1px solid #408F95;
-	border-left: 1px solid #408F95;
-	content: "";
-	height: 0.625rem;
-	transform: translateX(2px) rotate(45deg);
-	width: 0.625rem;
-}
-
-.wp-pagenavi .nextpostslink:before {
-	border-bottom: 1px solid #408F95;
-	border-right: 1px solid #408F95;
-	content: "";
-	height: 0.625rem;
-	transform: translateX(-2px) rotate(-45deg);
-	width: 0.625rem;
-}
-
-.previouspostslink:hover:before {
-	border-bottom-color: #fff;
-	border-left-color: #fff;
-}
-
-.nextpostslink:hover:before {
-	border-bottom-color: #fff;
-	border-right-color: #fff;
 }
 
 /*デフォルト色の指定*/

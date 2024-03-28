@@ -21,15 +21,20 @@
                 <?php while(have_posts()) : // 記事数分ループ ?>
                 <?php the_post(); ?>
                     <a href="<?php the_permalink(); ?>" class="lower-blog__card blog-item">
+                      <?php if(get_the_post_thumbnail()): ?>
                         <div class="blog-item__image">
-                            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog_img1.jpg" alt="赤色の珊瑚礁">
+                            <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
                         </div>
+                        <?php else: ?>
+                          <div class="blog-item__image">
+                            <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
+                        </div>
+                      <?php endif; ?>
                         <div class="blog-item__body">
                             <time class="blog-item__date" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
                             <h3 class="blog-item__text-title"><?php the_title(); ?></h3>
                             <p class="blog-item__text">
-                            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                            ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
+                            <?php the_excerpt(); ?>
                             </p>
                         </div>
                     </a>

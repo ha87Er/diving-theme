@@ -22,7 +22,7 @@ jQuery(function ($) {
   });
 
   // spナビクリックしたらドロワーが閉じる
-  $(".js-drawer a[href^='#']").on("click", function (e) {
+  $("a").on("click", function (e) {
     $(".js-hamburger").removeClass("is-active");
     $(".js-drawer").removeClass("is-active");
     $(".js-header").removeClass("is-open");
@@ -256,33 +256,51 @@ jQuery(function ($) {
   });
 
   //日付のスライド
-jQuery(document).ready(function () {
-  // 最初の要素を開いた状態にする
-  jQuery(".archive__month-wrap").slideUp();
-  jQuery(".archive__year").addClass("is-open");
-  jQuery(".archive__year").next('.archive__month-wrap').slideDown();
+  // jQuery(document).ready(function() {
+  //   // 最初の要素を開いた状態にする
+  //   jQuery(".archive__year:first").parent().addClass("is-open");
+  //   jQuery(".archive__year:first").next().slideDown();
 
-  // クリックしたときの処理
-  jQuery(".archive__year").on("click", function (e) {
-    e.preventDefault();
+  //   // クリックしたときの処理
+  //   jQuery(".archive__year").on("click", function (e) {
+  //     e.preventDefault();
 
-    // クリックされた要素内の.month-wrapを取得
-    var $monthWrap = jQuery(this).next('.archive__month-wrap');
+  //     if (jQuery(this).parent().hasClass("is-open")) {
+  //       jQuery(this).parent().removeClass("is-open");
+  //       jQuery(this).next().slideUp();
+  //     } else {
+  //       jQuery(this).parent().addClass("is-open");
+  //       jQuery(this).next().slideDown();
+  //     }
+  //   });
+  // });
 
-    if ($monthWrap.is(":visible")) {
-      $monthWrap.slideUp();
-      // クリックした要素に is-open クラスを削除して:beforeのスタイルを変更する
-      jQuery(this).removeClass('is-open');
-    } else {
-      // 他の.month-wrapを閉じる
-      jQuery(".archive__month-wrap").slideUp();
-      $monthWrap.slideDown();
-      // クリックした要素に is-open クラスを追加して:beforeのスタイルを変更する
-      jQuery(this).addClass('is-open');
-    }
+  //日付のスライド
+  jQuery(document).ready(function () {
+    // 最初の要素を開いた状態にする
+    jQuery(".archive__month-wrap").slideUp();
+    jQuery(".archive__year").addClass("is-open");
+    jQuery(".archive__year").next('.archive__month-wrap').slideDown();
+
+    // クリックしたときの処理
+    jQuery(".archive__year").on("click", function (e) {
+      e.preventDefault();
+
+      // クリックされた要素内の.month-wrapを取得
+      var $monthWrap = jQuery(this).next('.archive__month-wrap');
+      if ($monthWrap.is(":visible")) {
+        $monthWrap.slideUp();
+        // クリックした要素に is-open クラスを削除して:beforeのスタイルを変更する
+        jQuery(this).removeClass('is-open');
+      } else {
+        // 他の.month-wrapを閉じる
+        jQuery(".archive__month-wrap").slideUp();
+        $monthWrap.slideDown();
+        // クリックした要素に is-open クラスを追加して:beforeのスタイルを変更する
+        jQuery(this).addClass('is-open');
+      }
+    });
   });
-});
-
 
   //パラメーターの設定
   $(function () {
@@ -318,11 +336,9 @@ jQuery(document).ready(function () {
       }
     });
   });
-});
-
 
   //送信ボタンを押した時のみバリデーションメッセージ表示
   jQuery(".button--form").click(function () {
     jQuery(".wpcf7-form-control-wrap").addClass("is-error");
   });
-
+});
