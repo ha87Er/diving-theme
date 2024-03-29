@@ -141,16 +141,68 @@ function my_add_meta_box($settings, $type, $id, $meta_type)
 add_filter('smart-cf-register-fields', 'my_add_meta_box', 10, 4);
 
 //アーカイブの表示件数変更
-function change_posts_per_page($query) {
-    if ( is_admin() || ! $query->is_main_query() )
-        return;
+// function change_posts_per_page( $query ) {
+//   if ( is_admin() || ! $query->is_main_query() )
+//       return;
 
-    if ( $query->is_archive('campaign') ) { //カスタム投稿タイプを指定
-        $query->set( 'posts_per_page', '4' ); //表示件数を指定
-    }
+//   if ( $query->is_post_type_archive( 'campaign' ) ) {
+//       $query->set( 'posts_per_page', 4 );
+//   }
 
-    if ( $query->is_archive('voice') ) { //カスタム投稿タイプを指定
-        $query->set( 'posts_per_page', '6' ); //表示件数を指定
-    }
+//   if ( $query->is_post_type_archive( 'voice' ) ) {
+//       $query->set( 'posts_per_page', 6 );
+//   }
+// }
+// add_action( 'parse_query', 'change_posts_per_page' );
+
+
+// アーカイブとタクソノミーページの表示件数変更
+// function change_posts_per_page( $query ) {
+//   if ( is_admin() || ! $query->is_main_query() )
+//       return;
+
+//   if ( $query->is_post_type_archive( 'campaign' ) ) {
+//       $query->set( 'posts_per_page', 4 );
+//   }
+
+//   if ( $query->is_post_type_archive( 'voice' ) ) {
+//       $query->set( 'posts_per_page', 6 );
+//   }
+
+//   // タクソノミーページにも同じ表示件数を適用する
+//   if ( $query->is_tax( array( 'campaign_category', 'voice_category' ) ) ) {
+//       $query->set( 'posts_per_page', get_option( 'posts_per_page' ) );
+//   }
+
+//   // タームの一覧表にも同じ表示件数を適用する
+//   if ( $query->is_tax( array( 'campaign_category', 'voice_category' ) ) && ! $query->is_tax() ) {
+//     $query->set( 'posts_per_page', get_option( 'posts_per_page' ) );
+// }
+// }
+// add_action( 'pre_get_posts', 'change_posts_per_page' );
+
+// アーカイブとタクソノミーページの表示件数変更
+function change_posts_per_page( $query ) {
+  if ( is_admin() || ! $query->is_main_query() )
+      return;
+
+  if ( $query->is_post_type_archive( 'campaign' ) ) {
+      $query->set( 'posts_per_page', 4 );
+  }
+
+  if ( $query->is_post_type_archive( 'voice' ) ) {
+      $query->set( 'posts_per_page', 6 );
+  }
+
+  // campaign_category タクソノミーに属するすべてのタームに適用
+  if ( $query->is_tax( 'campaign_category' ) ) {
+      $query->set( 'posts_per_page', 4 );
+  }
+
+  // voice_category タクソノミーに属するすべてのタームに適用
+  if ( $query->is_tax( 'voice_category' ) ) {
+      $query->set( 'posts_per_page', 6 );
+  }
 }
 add_action( 'pre_get_posts', 'change_posts_per_page' );
+

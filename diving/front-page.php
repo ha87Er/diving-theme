@@ -248,7 +248,12 @@
           </div>
         </div>
         <div class="voice-item__body">
-          <p class="voice-item__text"><?php the_field('voice_2'); ?></p>
+          <p class="voice-item__text">
+            <?php
+              $text = mb_substr(get_field('voice_2'),0,80,'utf-8');
+              echo $text.'...';
+            ?>
+         </p>
         </div>
       </div>
       <?php endwhile;

@@ -31,6 +31,7 @@
       $contact = esc_url(home_url('/contact/'));
       $privacy = esc_url(home_url('/privacy-policy/'));
       $terms = esc_url(home_url('/terms-of-service/'));
+      $sitemap = esc_url(home_url('/sitemap/'));
       ?>
 
   <div class="sitemap layout-sitemap">
@@ -85,6 +86,9 @@
             </ul>
             <ul class="nav__items">
               <li class="nav__item nav__item--black nav__item--bold"><a href="<?php echo $contact; ?>">お問い合わせ</a></li>
+            </ul>
+            <ul class="nav__items">
+              <li class="nav__item nav__item--black nav__item--bold"><a href="<?php echo $sitemap; ?>">サイトマップ</a></li>
             </ul>
           </div>
         </div>

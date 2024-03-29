@@ -17,6 +17,7 @@
       $contact = esc_url(home_url('/contact/'));
       $privacy = esc_url(home_url('/privacy-policy/'));
       $terms = esc_url(home_url('/terms-of-service/'));
+      $sitemap = esc_url(home_url('/sitemap/'));
       ?>
 
 <?php if(!is_page('contact') && !is_404()): ?>
@@ -65,10 +66,10 @@
         <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo-white.svg" alt="CodeUps">
       </div>
       <div class="footer__sns">
-        <a href="#" class="footer__facebook">
+        <a href="https://www.facebook.com/nitori.jp/?locale=ja_JP" target="_blank" rel="noopener" class="footer__facebook">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/facebook.png" alt="facebookアイコン">
         </a>
-        <a href="#" class="footer__instagram">
+        <a href="https://www.instagram.com/nitori_official/?hl=ja" class="footer__instagram" target="_blank" rel="noopener">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/instagram.png" alt="instagramアイコン">
         </a>
       </div>
@@ -131,6 +132,9 @@
           </ul>
           <ul class="nav__items">
             <li class="nav__item nav__item--bold"><a href="<?php echo $contact; ?>">お問い合わせ</a></li>
+          </ul>
+          <ul class="nav__items">
+            <li class="nav__item nav__item--bold"><a href="<?php echo $sitemap; ?>">サイトマップ</a></li>
           </ul>
         </div>
       </div>

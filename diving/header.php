@@ -5,19 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="robots" content="noindex" />
-  <!-- meta情報 -->
-  <title>(仮)DIVING</title>
-  <meta name="description" content="(仮)DIVINGでは、初心者から上級者まで、幅広いレベルのダイバーに対応したプログラムをご用意しています。プロのインストラクターが丁寧にサポートし、安心してダイビングの世界を楽しんでいただけます。透明度抜群の海で、カラフルな海洋生物たちとの出会いをお楽しみください。" />
-  <meta name="keywords" content="" />
-  <!-- ogp -->
-  <meta property="og:title" content="(仮)DIVING" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hana-coco.net" />
-  <meta property="og:image" content="https://hana-coco.net/assets/images/common/main-visual.jpg" />
-  <meta property="og:site_name" content="(仮)DIVING" />
-  <meta property="og:description" content="(仮)DIVINGでは、初心者から上級者まで、幅広いレベルのダイバーに対応したプログラムをご用意しています。プロのインストラクターが丁寧にサポートし、安心してダイビングの世界を楽しんでいただけます。透明度抜群の海で、カラフルな海洋生物たちとの出会いをお楽しみください。" />
-  <!-- ファビコン -->
-  <link rel="icon" href="<?php echo get_theme_file_uri(); ?>/assets/images/common/favicon.ico" />
   <?php wp_head(); ?>
 </head>
 <body>
@@ -43,6 +30,7 @@
       $contact = esc_url(home_url('/contact/'));
       $privacy = esc_url(home_url('/privacy-policy/'));
       $terms = esc_url(home_url('/terms-of-service/'));
+      $sitemap = esc_url(home_url('/sitemap/'));
       ?>
 
       <a class="header__logo-link" href="<?php echo $home; ?>">
@@ -127,6 +115,9 @@
                 </ul>
                 <ul class="nav__items">
                   <li class="nav__item nav__item--bold"><a href="<?php echo $contact; ?>">お問い合わせ</a></li>
+                </ul>
+                <ul class="nav__items">
+                  <li class="nav__item nav__item--bold"><a href="<?php echo $sitemap; ?>">サイトマップ</a></li>
                 </ul>
               </div>
             </div>
