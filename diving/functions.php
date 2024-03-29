@@ -11,8 +11,16 @@ function enqueue_custom_styles_scripts() {
     wp_enqueue_script( 'easing-js', get_theme_file_uri( '/assets/js/jquery.easing.min.js' ), array('jquery'), '1.0', true );
     wp_enqueue_script( 'custom-script', get_theme_file_uri( '/assets/js/script.js' ), array('jquery'), '1.0', true );
 
-    // Google Fonts
-    wp_enqueue_style( 'google-fonts-gotu-noto', 'https://fonts.googleapis.com/css2?family=Gotu&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@400;500;700&display=swap' );
+    // Gotuフォントの読み込み
+    wp_enqueue_style( 'google-fonts-gotu', 'https://fonts.googleapis.com/css2?family=Gotu&display=swap' );
+
+    // Noto Sans JPフォントの読み込み
+    wp_enqueue_style( 'google-fonts-noto-sans-jp', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap' );
+
+    // Noto Serif JPフォントの読み込み
+    wp_enqueue_style( 'google-fonts-noto-serif-jp', 'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap' );
+
+      // Latoの読み込み
     wp_enqueue_style( 'google-fonts-lato', 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap' );
 }
 
@@ -140,48 +148,8 @@ function my_add_meta_box($settings, $type, $id, $meta_type)
 }
 add_filter('smart-cf-register-fields', 'my_add_meta_box', 10, 4);
 
-//アーカイブの表示件数変更
-// function change_posts_per_page( $query ) {
-//   if ( is_admin() || ! $query->is_main_query() )
-//       return;
 
-//   if ( $query->is_post_type_archive( 'campaign' ) ) {
-//       $query->set( 'posts_per_page', 4 );
-//   }
-
-//   if ( $query->is_post_type_archive( 'voice' ) ) {
-//       $query->set( 'posts_per_page', 6 );
-//   }
-// }
-// add_action( 'parse_query', 'change_posts_per_page' );
-
-
-// アーカイブとタクソノミーページの表示件数変更
-// function change_posts_per_page( $query ) {
-//   if ( is_admin() || ! $query->is_main_query() )
-//       return;
-
-//   if ( $query->is_post_type_archive( 'campaign' ) ) {
-//       $query->set( 'posts_per_page', 4 );
-//   }
-
-//   if ( $query->is_post_type_archive( 'voice' ) ) {
-//       $query->set( 'posts_per_page', 6 );
-//   }
-
-//   // タクソノミーページにも同じ表示件数を適用する
-//   if ( $query->is_tax( array( 'campaign_category', 'voice_category' ) ) ) {
-//       $query->set( 'posts_per_page', get_option( 'posts_per_page' ) );
-//   }
-
-//   // タームの一覧表にも同じ表示件数を適用する
-//   if ( $query->is_tax( array( 'campaign_category', 'voice_category' ) ) && ! $query->is_tax() ) {
-//     $query->set( 'posts_per_page', get_option( 'posts_per_page' ) );
-// }
-// }
-// add_action( 'pre_get_posts', 'change_posts_per_page' );
-
-// アーカイブとタクソノミーページの表示件数変更
+// ページごとに表示件数を変える
 function change_posts_per_page( $query ) {
   if ( is_admin() || ! $query->is_main_query() )
       return;
