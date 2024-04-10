@@ -322,15 +322,11 @@
     $trial = SCF::get('trail-diving', 12);
     $fan = SCF::get('fan-diving', 12);
     $special = SCF::get('special', 12);
-    
-    var_dump($license);
-    var_dump($trial);
-    var_dump($fan);
-    var_dump($special);
+
     // すべての項目が空であるかをチェック
     if (empty($license) && empty($trial) && empty($fan) && empty($special)) :
       ?>
-    <div class="article-nothing">
+      <div class="article-nothing">
       <p class="article-nothing__text">ただいま準備中です。</p>
     </div>
     <?php else : ?>
@@ -342,14 +338,13 @@
       </picture>
       </div>
       <div class="price__list price-list">
-        <?php
-          $menu = get_post_meta($post->ID, 'menu', true);
-          var_dump($menu);
-          $price = get_post_meta($post->ID, 'price', true);
-
-          // menuとpriceの両方が入力されている場合にのみテーブルを表示
-          if (!empty($menu) && !empty($price)):
-        ?>
+      <!-- ライセンス講習 -->
+      <?php
+      $menu = get_post_meta(12, 'menu', true);
+      $price = get_post_meta(12, 'price', true);
+      // menuとpriceの両方が入力されている場合にのみテーブルを表示
+      if (!empty($menu) && !empty($price)):
+      ?>
         <div class="price-list__item">
           <h3 class="price-list__title">ライセンス講習</h3>
           <dl class="price-list__description">
@@ -368,12 +363,13 @@
         </div>
         <?php endif; ?>
 
+        <!-- 体験ダイビング -->
         <?php
-          $menu = get_post_meta($post->ID, 'menu2', true);
-          $price = get_post_meta($post->ID, 'price2', true);
+        $menu2 = get_post_meta(12, 'menu2', true);
+        $price2 = get_post_meta(12, 'price2', true);
 
-          // menuとpriceの両方が入力されている場合にのみテーブルを表示
-          if (!empty($menu) && !empty($price)):
+        // menuとpriceの両方が入力されている場合にのみテーブルを表示
+        if (!empty($menu2) && !empty($price2)):
         ?>
         <div class="price-list__item">
           <h3 class="price-list__title">体験ダイビング</h3>
@@ -393,12 +389,13 @@
         </div>
         <?php endif; ?>
 
+        <!-- ファンダイビング -->
         <?php
-          $menu = get_post_meta($post->ID, 'menu3', true);
-          $price = get_post_meta($post->ID, 'price3', true);
+        $menu3 = get_post_meta(12, 'menu3', true);
+        $price3 = get_post_meta(12, 'price3', true);
 
-          // menuとpriceの両方が入力されている場合にのみテーブルを表示
-          if (!empty($menu) && !empty($price)):
+        // menuとpriceの両方が入力されている場合にのみテーブルを表示
+        if (!empty($menu3) && !empty($price3)):
         ?>
         <div class="price-list__item">
           <h3 class="price-list__title">ファンダイビング</h3>
@@ -418,30 +415,31 @@
         </div>
         <?php endif; ?>
 
+        <!-- スペシャルダイビング -->
         <?php
-          $menu = get_post_meta($post->ID, 'menu4', true);
-          $price = get_post_meta($post->ID, 'price4', true);
+        $menu4 = get_post_meta(12, 'menu4', true);
+        $price4 = get_post_meta(12, 'price4', true);
 
-          // menuとpriceの両方が入力されている場合にのみテーブルを表示
-          if (!empty($menu) && !empty($price)):
+        // menuとpriceの両方が入力されている場合にのみテーブルを表示
+        if (!empty($menu4) && !empty($price4)):
         ?>
-          <div class="price-list__item">
-            <h3 class="price-list__title">スペシャルダイビング</h3>
-            <dl class="price-list__description">
-            <?php
-                if (!empty($special)) {
-                    foreach ($special as $fields) { ?>
-                        <div class="price-list__wrap">
-                            <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
-                            <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
-                        </div>
-            <?php
-                    }
-                }
-            ?>
-            </dl>
-          </div>
-        <?php endif; ?>
+        <div class="price-list__item">
+          <h3 class="price-list__title">スペシャルダイビング</h3>
+          <dl class="price-list__description">
+          <?php
+              if (!empty($special)) {
+                  foreach ($special as $fields) { ?>
+                      <div class="price-list__wrap">
+                          <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
+                          <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
+                      </div>
+          <?php
+                  }
+              }
+          ?>
+          </dl>
+        </div>
+       <?php endif; ?>
       </div>
     </div>
     <div class="price__button">
