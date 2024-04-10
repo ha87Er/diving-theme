@@ -25,14 +25,16 @@
         endforeach;
       ?>
     </div>
+    <?php if (have_posts()) : // 記事があれば表示 ?>
     <div class="lower-campaign__cards">
-        <?php if (have_posts()) : // 記事があれば表示 ?>
         <?php while(have_posts()) : // 記事数分ループ ?>
         <?php the_post(); ?>
             <div class="lower-campaign__card campaign-card">
                 <div class="campaign-card__image">
                 <?php if(get_the_post_thumbnail()): ?>
                     <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+                <?php else: ?>
+                    <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
                 <?php endif; ?>
                 </div>
                 <div class="campaign-card__body campaign-card__body--lower">
@@ -42,29 +44,45 @@
                     </p>
                 </div>
                 <div class="campaign-card__title campaign-card__title--large"><?php the_title(); ?></div>
-                <p class="campaign-card__text campaign-card__text--lower">全部コミコミ(お一人様)</p>
+                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                  <p class="campaign-card__text campaign-card__text--lower">全部コミコミ(お一人様)</p>
+                  <?php endif; ?>
                 <div class="campaign-card__price campaign-card__price--lower">
+                  <?php if(get_field('campaign_1')): ?>
                     <p class="campaign-card__price-before campaign-card__price-before--lower"><?php the_field('campaign_1'); ?></p>
+                  <?php endif; ?>
+                  <?php if(get_field('campaign_2')): ?>
                     <p class="campaign-card__price-after campaign-card__price-after--lower"><?php the_field('campaign_2'); ?></p>
+                  <?php endif; ?>
+                  <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                  <?php endif; ?>
                 </div>
                 <div class="campaign-card__description u-desktop">
+                    <?php if(get_field('campaign_3')): ?>
                     <p class="campaign-card__description-text">
-                    <?php the_field('campaign_3'); ?>
+                      <?php the_field('campaign_3'); ?>
                     </p>
+                    <?php endif; ?>
+                    <?php if(get_field('campaign_4')): ?>
                     <p class="campaign-card__date"><?php the_field('campaign_4'); ?></p>
+                    <?php endif; ?>
                     <p class="campaign-card__info">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign-card__button">
-                    <a href="<?php esc_url(the_field('campaign_5')); ?>" class="button">
+                    <a href="<?php echo esc_url(home_url('/contact/')) ?>" class="button">
                         <span>Contact us</span>
                     </a>
                     </div>
                 </div>
                 </div>
             </div>
-        <?php endwhile; ?>
-        <?php endif; ?>
-    </div>
-    <!-- ページネーション -->
+            <?php endwhile; ?>
+          </div>
+      <?php else : ?>
+        <div class="article-nothing">
+          <p class="article-nothing__text">該当する記事はありません。</p>
+        </div>
+      <?php endif; ?>
+      <!-- ページネーション -->
     <div class="layout-pagenavi">
         <?php wp_pagenavi(); ?>
     </div>

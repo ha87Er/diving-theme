@@ -24,6 +24,40 @@
     }
 }
 
+.information-tabs__tab-icon1,
+.information-tabs__tab-icon2,
+.information-tabs__tab-icon3{
+    display: none;
+
+    @include mq('md'){
+        display: block;
+        width: rem(64);
+        height: rem(64);
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        background-color: $accent-color;
+    }
+}
+
+.information-tabs__tab-icon1{
+    @include mq('md'){
+        mask-image: url(../images/common/icon-whale_white.svg);
+    }
+}
+
+.information-tabs__tab-icon2{
+    @include mq('md'){
+        mask-image: url(../images/common/icon-whale.svg);
+    }
+}
+
+.information-tabs__tab-icon3{
+    @include mq('md'){
+        mask-image: url(../images/common/icon-fish.svg);
+    }
+}
+
 .information-tabs__tab span{
     color: $accent-color;
     font-size: rem(14);
@@ -31,18 +65,9 @@
     display: flex;
     align-items: center;
     column-gap: rem(8);
-    
+
     @include mq('lg'){
         font-size: rem(24);
-    }
-}
-
-.information-tabs__tab svg{
-    display: none;
-
-    @include mq('md'){
-        width: rem(61);
-        display: block;
     }
 }
 
@@ -54,21 +79,25 @@
         color: $white;
     }
 
-    path{
-        fill: $white;
+    .information-tabs__tab-icon1,
+    .information-tabs__tab-icon2,
+    .information-tabs__tab-icon3{
+        background-color: $white;
     }
+
 }
 
 //ボタンがアクティブになった時のスタイル
 .information-tabs__tab.is-active{
     background-color: $accent-color;
 
-    path{
-        fill: $white;
-
+    span{
+        color: $white;
     }
-}
 
-.information-tabs__tab.is-active span{
-    color: $white;
+    .information-tabs__tab-icon1,
+    .information-tabs__tab-icon2,
+    .information-tabs__tab-icon3{
+        background-color: $white;
+    }
 }

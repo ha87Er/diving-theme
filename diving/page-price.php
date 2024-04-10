@@ -16,6 +16,13 @@
   <div class="lower-price__inner lower-inner inner">
     <div class="lower-price__items">
       <!-- ライセンス講習 -->
+      <?php
+      $menu = get_post_meta($post->ID, 'menu', true);
+      $price = get_post_meta($post->ID, 'price', true);
+
+      // menuとpriceの両方が入力されている場合にのみテーブルを表示
+      if (!empty($menu) && !empty($price)):
+      ?>
       <table data-id="#license" id="license" class="lower-price__table table">
         <tbody class="table__body">
           <tr>
@@ -34,7 +41,15 @@
           <?php } ?>
         </tbody>
       </table>
+      <?php endif; ?>
       <!-- 体験ダイビング -->
+      <?php
+      $menu = get_post_meta($post->ID, 'menu2', true);
+      $price = get_post_meta($post->ID, 'price2', true);
+
+      // menuとpriceの両方が入力されている場合にのみテーブルを表示
+      if (!empty($menu) && !empty($price)):
+      ?>
       <table data-id="#experience" id="experience" class="lower-price__table table">
         <tbody class="table__body">
           <tr>
@@ -53,7 +68,15 @@
           <?php } ?>
         </tbody>
       </table>
+      <?php endif; ?>
       <!-- ファンダイビング -->
+      <?php
+      $menu = get_post_meta($post->ID, 'menu3', true);
+      $price = get_post_meta($post->ID, 'price3', true);
+
+      // menuとpriceの両方が入力されている場合にのみテーブルを表示
+      if (!empty($menu) && !empty($price)):
+      ?>
       <table data-id="#fan" id="fan" class="lower-price__table table">
         <tbody class="table__body">
           <tr>
@@ -72,7 +95,15 @@
           <?php } ?>
         </tbody>
       </table>
+      <?php endif; ?>
       <!-- スペシャルダイビング -->
+      <?php
+      $menu = get_post_meta($post->ID, 'menu4', true);
+      $price = get_post_meta($post->ID, 'price4', true);
+
+      // menuとpriceの両方が入力されている場合にのみテーブルを表示
+      if (!empty($menu) && !empty($price)):
+      ?>
       <table data-id="#special" id="special" class="lower-price__table table">
         <tbody class="table__body">
           <tr>
@@ -91,7 +122,18 @@
           <?php } ?>
         </tbody>
       </table>
+      <?php endif; ?>
     </div>
+
+    <?php
+      if (empty($price1) && empty($price2) && empty($price3) && empty($special)) {
+        echo '
+        <div class="article-nothing">
+            <p class="article-nothing__text">ただいま準備中です。</p>
+        </div>';
+      }
+    ?>
+
   </div>
 </div>
 

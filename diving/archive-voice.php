@@ -29,15 +29,19 @@
         endforeach;
         ?>
       </div>
-      <div class="lower-voice__cards voice-items voice-items--lower-voice">
       <?php if (have_posts()) : // 記事があれば表示 ?>
+      <div class="lower-voice__cards voice-items voice-items--lower-voice">
         <?php while(have_posts()) : // 記事数分ループ ?>
         <?php the_post(); ?>
         <div class="voice-items__item voice-item">
           <div class="voice-item__head">
             <div class="voice-item__content">
               <div class="voice-item__meta">
-                <p class="voice-item__age voice-item__age--lower"><?php the_field('voice_1'); ?></p>
+                <p class="voice-item__age voice-item__age--lower">
+                  <?php if(get_field('voice_1')): ?>
+                  <?php the_field('voice_1'); ?>
+                  <?php endif; ?>
+                </p>
                 <div class="voice-item__tag voice-item__tag--lower">
                     <?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?>
                 </div>
@@ -47,18 +51,26 @@
             <div class="voice-item__image colorbox inview">
                 <?php if(get_the_post_thumbnail()): ?>
                     <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+                <?php else: ?>
+                    <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
                 <?php endif; ?>
             </div>
           </div>
           <div class="voice-item__body">
             <p class="voice-item__text">
+              <?php if(get_field('voice_2')): ?>
                 <?php the_field('voice_2'); ?>
+              <?php endif; ?>
             </p>
           </div>
         </div>
         <?php endwhile; ?>
-        <?php endif; ?>
+      </div>
+      <?php else : ?>
+        <div class="article-nothing">
+          <p class="article-nothing__text">該当する記事はありません。</p>
         </div>
+      <?php endif; ?>
 
       <!-- ページネーション -->
       <div class="layout-pagenavi">

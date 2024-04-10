@@ -508,6 +508,18 @@ a {
 	padding-bottom: 0.0625rem;
 }
 
+.article-nothing {
+	margin-top: 3.75rem;
+}
+
+.article-nothing__text {
+	text-align: center;
+}
+
+.article-nothing__text.article-nothing__text--white {
+	color: #fff;
+}
+
 .article__date {
 	color: #0D2936;
 	font-family: "Gotu", sans-serif;
@@ -841,7 +853,6 @@ a {
 .campaign-card__title {
 	border-bottom: 1px solid #408F95;
 	color: #0D2936;
-	flex-grow: 1;
 	font-size: 1rem;
 	font-weight: 500;
 	line-height: 24px;
@@ -1625,6 +1636,12 @@ div.colorbox img {
 	transition: all 0.3s ease;
 }
 
+.information-tabs__tab-icon1,
+.information-tabs__tab-icon2,
+.information-tabs__tab-icon3 {
+	display: none;
+}
+
 .information-tabs__tab span {
 	-moz-column-gap: 0.5rem;
 	align-items: center;
@@ -1635,10 +1652,6 @@ div.colorbox img {
 	text-align: center;
 }
 
-.information-tabs__tab svg {
-	display: none;
-}
-
 .information-tabs__tab:hover {
 	background-color: #408F95;
 }
@@ -1647,20 +1660,24 @@ div.colorbox img {
 	color: #fff;
 }
 
-.information-tabs__tab:hover path {
-	fill: #fff;
+.information-tabs__tab:hover .information-tabs__tab-icon1,
+.information-tabs__tab:hover .information-tabs__tab-icon2,
+.information-tabs__tab:hover .information-tabs__tab-icon3 {
+	background-color: #fff;
 }
 
 .information-tabs__tab.is-active {
 	background-color: #408F95;
 }
 
-.information-tabs__tab.is-active path {
-	fill: #fff;
-}
-
 .information-tabs__tab.is-active span {
 	color: #fff;
+}
+
+.information-tabs__tab.is-active .information-tabs__tab-icon1,
+.information-tabs__tab.is-active .information-tabs__tab-icon2,
+.information-tabs__tab.is-active .information-tabs__tab-icon3 {
+	background-color: #fff;
 }
 
 .information {
@@ -3727,9 +3744,34 @@ html {
 	padding: 0.8125rem 0;
 }
 
-.information-tabs__tab svg {
+.information-tabs__tab-icon1,
+.information-tabs__tab-icon2,
+.information-tabs__tab-icon3 {
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	-webkit-mask-size: contain;
+	background-color: #408F95;
 	display: block;
-	width: 3.8125rem;
+	height: 4rem;
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+	width: 4rem;
+}
+
+.information-tabs__tab-icon1 {
+	-webkit-mask-image: url(../images/common/icon-whale_white.svg);
+	mask-image: url(../images/common/icon-whale_white.svg);
+}
+
+.information-tabs__tab-icon2 {
+	-webkit-mask-image: url(../images/common/icon-whale.svg);
+	mask-image: url(../images/common/icon-whale.svg);
+}
+
+.information-tabs__tab-icon3 {
+	-webkit-mask-image: url(../images/common/icon-fish.svg);
+	mask-image: url(../images/common/icon-fish.svg);
 }
 
 .information {

@@ -57,62 +57,90 @@
           </div>
         </div>
         <?php endforeach; ?>
-
       </div>
     </div>
-
     <?php endif; ?>
   </div>
  </section>
 
-<section class="campaign layout-campaign">
+ <section class="campaign layout-campaign">
   <div class="campaign__inner inner">
     <div class="campaign__title title">
       <div class="title__en">Campaign</div>
       <h2 class="title__ja">キャンペーン</h2>
     </div>
-    <div class="campaign__arrow-wrap">
-      <div class="swiper-button-prev campaign-prev js-campaign-prev"></div>
-      <div class="swiper-button-next campaign-next js-campaign-next"></div>
-    </div>
-    <div class="swiper campaign__swiper js-campaign-swiper">
-      <div class="swiper-wrapper campaign__cards">
-      <?php
-      $args = array(
-          'post_type'      => 'campaign', // カスタム投稿タイプのスラッグを指定
-          'posts_per_page' => 5, // 表示する投稿の数
-          'orderby'        => 'date', // 日付で並び替える
-          'order'          => 'DESC', // 降順で並び替える
-      );
 
-      $custom_query = new WP_Query( $args );
+    <?php
+    $args = array(
+        'post_type'      => 'campaign', // カスタム投稿タイプのスラッグを指定
+        'posts_per_page' => 5, // 表示する投稿の数
+    );
 
-      while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
-        <div class="swiper-slide campaign__card campaign-card">
-          <?php if(get_the_post_thumbnail()): ?>
-              <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
-          <?php endif; ?>
-          <div class="campaign-card__body">
-            <div><p class="campaign-card__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'campaign_category')[0]->name); ?></p></div>
-            <div class="campaign-card__title"><?php the_title(); ?></div>
-            <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-            <div class="campaign-card__price">
-              <p class="campaign-card__price-before"><?php the_field('campaign_1'); ?></p>
-              <p class="campaign-card__price-after"><?php the_field('campaign_2'); ?></p>
-            </div>
-          </div>
-        </div>
-        <?php endwhile;
-      wp_reset_postdata(); ?>
+    $custom_query = new WP_Query( $args );
+
+    if ( $custom_query->have_posts() ) :
+    ?>
+      <div class="campaign__arrow-wrap">
+        <div class="swiper-button-prev campaign-prev js-campaign-prev"></div>
+        <div class="swiper-button-next campaign-next js-campaign-next"></div>
       </div>
-    </div>
-    <div class="campaign__button">
-      <a href="<?php echo esc_url(home_url('/campaign/')) ?>" class="button">
-        <span>View more</span>
-      </a>
-    </div>
+
+      <div class="swiper campaign__swiper js-campaign-swiper">
+        <div class="swiper-wrapper campaign__cards">
+          <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
+            <div class="swiper-slide campaign__card campaign-card">
+              <div class="campaign-card__image">
+                <?php if(get_the_post_thumbnail()): ?>
+                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+                <?php else: ?>
+                  <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
+                <?php endif; ?>
+              </div>
+
+              <div class="campaign-card__body">
+                <div>
+                  <p class="campaign-card__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'campaign_category')[0]->name); ?></p>
+                </div>
+
+                <div class="campaign-card__title"><?php the_title(); ?></div>
+
+                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                  <p class="campaign-card__text">全部コミコミ(お一人様)</p>
+                  <div class="campaign-card__price">
+                <?php endif; ?>
+
+                <?php if(get_field('campaign_1')): ?>
+                  <p class="campaign-card__price-before"><?php the_field('campaign_1'); ?></p>
+                <?php endif; ?>
+
+                <?php if(get_field('campaign_2')): ?>
+                  <p class="campaign-card__price-after"><?php the_field('campaign_2'); ?></p>
+                <?php endif; ?>
+
+                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                  </div>
+                <?php endif; ?>
+              </div>
+            </div>
+          <?php endwhile; ?>
+        </div>
+      </div>
+
+      <?php wp_reset_postdata(); ?>
+
+      <div class="campaign__button">
+        <a href="<?php echo esc_url(home_url('/campaign/')) ?>" class="button">
+          <span>View more</span>
+        </a>
+      </div>
+    <?php else: ?>
+      <div class="article-nothing">
+        <p class="article-nothing__text">ただいま準備中です。</p>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
+
 
 <section class="about layout-about">
   <div class="about__inner inner">
@@ -174,44 +202,49 @@
       <div class="title__en title__en--white">Blog</div>
       <h2 class="title__ja title__ja--white">ブログ</h2>
     </div>
+    <?php
+    $args = array(
+        'post_type'      => 'post', // ポストタイプを指定
+        'posts_per_page' => 3, // 表示する投稿の数
+    );
+
+    $custom_query = new WP_Query( $args );
+
+    if ( $custom_query->have_posts() ) :
+    ?>
     <div class="blog__items blog-items">
-      <?php
-        $args = array(
-            'post_type'      => 'post', // ポストタイプを指定
-            'posts_per_page' => 3, // 表示する投稿の数
-            'orderby'        => 'date', // 日付で並び替える
-            'order'          => 'DESC', // 降順で並び替える
-        );
-
-        $custom_query = new WP_Query( $args );
-
-        while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
-      <a href="<?php the_permalink(); ?>" class="blog-items__item blog-item">
-        <div class="blog-item__image">
+      <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
+        <a href="<?php the_permalink(); ?>" class="blog-items__item blog-item">
+          <div class="blog-item__image">
             <?php if (has_post_thumbnail()): ?>
               <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
             <?php else: ?>
               <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
             <?php endif; ?>
-        </div>
-        <div class="blog-item__body">
-          <time class="blog-item__date" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
-          <h3 class="blog-item__text-title"><?php the_title(); ?></h3>
-          <p class="blog-item__text">
-            <?php the_excerpt(); ?>
-          </p>
-        </div>
-      </a>
-      <?php endwhile;
-      wp_reset_postdata(); ?>
+          </div>
+          <div class="blog-item__body">
+            <time class="blog-item__date" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
+            <h3 class="blog-item__text-title"><?php the_title(); ?></h3>
+            <p class="blog-item__text">
+              <?php the_excerpt(); ?>
+            </p>
+          </div>
+        </a>
+      <?php endwhile; ?>
     </div>
     <div class="blog__button">
       <a href="<?php echo esc_url(home_url('/blog/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>
+    <?php else: ?>
+    <div class="article-nothing">
+      <p class="article-nothing__text article-nothing__text--white">投稿記事がありません。</p>
+    </div>
+    <?php endif; ?>
   </div>
 </section>
+
 
 <section class="voice layout-voice">
   <div class="voice__inner inner">
@@ -219,51 +252,61 @@
       <div class="title__en">Voice</div>
       <h2 class="title__ja">お客様の声</h2>
     </div>
-    <div class="voice__items voice-items">
-
     <?php
-      $args = array(
-          'post_type'      => 'voice', // カスタム投稿タイプのスラッグを指定
-          'posts_per_page' => 2, // 表示する投稿の数
-          'orderby'        => 'date', // 日付で並び替える
-          'order'          => 'DESC', // 降順で並び替える
-      );
+    $args = array(
+        'post_type'      => 'voice', // カスタム投稿タイプのスラッグを指定
+        'posts_per_page' => 2, // 表示する投稿の数
+    );
 
-      $custom_query = new WP_Query( $args );
+    $custom_query = new WP_Query( $args );
 
-      while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
-      <div class="voice-items__item voice-item">
-        <div class="voice-item__head">
-          <div class="voice-item__content">
-            <div class="voice-item__meta">
-              <p class="voice-item__age"><?php the_field('voice_1'); ?></p>
-              <div class="voice-item__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?></div>
+    if ( $custom_query->have_posts() ) :
+    ?>
+    <div class="voice__items voice-items">
+      <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
+        <div class="voice-items__item voice-item">
+          <div class="voice-item__head">
+            <div class="voice-item__content">
+              <div class="voice-item__meta">
+                <p class="voice-item__age">
+                  <?php if(get_field('voice_1')): ?>
+                    <?php the_field('voice_1'); ?>
+                  <?php endif; ?>
+                </p>
+                <div class="voice-item__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?></div>
+              </div>
+              <h3 class="voice-item__title"><?php the_title(); ?></h3>
             </div>
-            <h3 class="voice-item__title"><?php the_title(); ?></h3>
+            <div class="voice-item__image colorbox inview">
+            <?php if(get_the_post_thumbnail()): ?>
+                <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+            <?php endif; ?>
+            </div>
           </div>
-          <div class="voice-item__image colorbox inview">
-          <?php if(get_the_post_thumbnail()): ?>
-                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
-                <?php endif; ?>
+          <div class="voice-item__body">
+            <p class="voice-item__text">
+            <?php if(get_field('voice_2')): ?>
+              <?php
+                $text = mb_substr(get_field('voice_2'),0,80,'utf-8');
+                echo $text.'...';
+              ?>
+            <?php endif; ?>
+           </p>
           </div>
         </div>
-        <div class="voice-item__body">
-          <p class="voice-item__text">
-            <?php
-              $text = mb_substr(get_field('voice_2'),0,80,'utf-8');
-              echo $text.'...';
-            ?>
-         </p>
-        </div>
-      </div>
-      <?php endwhile;
-      wp_reset_postdata(); ?>
+      <?php endwhile; ?>
     </div>
+
     <div class="voice__button">
       <a href="<?php echo esc_url(home_url('/voice/')) ?>" class="button">
         <span>View more</span>
       </a>
     </div>
+    <?php else: ?>
+    <div class="article-nothing">
+      <p class="article-nothing__text">ただいま準備中です。</p>
+    </div>
+    <?php endif; ?>
   </div>
 </section>
 
@@ -273,6 +316,24 @@
       <div class="title__en">Price</div>
       <h2 class="title__ja">料金一覧</h2>
     </div>
+    <?php
+    // 各項目のデータを取得
+    $license = SCF::get('license', 12);
+    $trial = SCF::get('trail-diving', 12);
+    $fan = SCF::get('fan-diving', 12);
+    $special = SCF::get('special', 12);
+    
+    var_dump($license);
+    var_dump($trial);
+    var_dump($fan);
+    var_dump($special);
+    // すべての項目が空であるかをチェック
+    if (empty($license) && empty($trial) && empty($fan) && empty($special)) :
+      ?>
+    <div class="article-nothing">
+      <p class="article-nothing__text">ただいま準備中です。</p>
+    </div>
+    <?php else : ?>
     <div class="price__content">
       <div class="price__image-wrap colorbox inview">
       <picture class="price__image">
@@ -281,11 +342,18 @@
       </picture>
       </div>
       <div class="price__list price-list">
+        <?php
+          $menu = get_post_meta($post->ID, 'menu', true);
+          var_dump($menu);
+          $price = get_post_meta($post->ID, 'price', true);
+
+          // menuとpriceの両方が入力されている場合にのみテーブルを表示
+          if (!empty($menu) && !empty($price)):
+        ?>
         <div class="price-list__item">
           <h3 class="price-list__title">ライセンス講習</h3>
           <dl class="price-list__description">
           <?php
-              $license = SCF::get('license', 12);
               if (!empty($license)) {
                   foreach ($license as $fields) { ?>
                       <div class="price-list__wrap">
@@ -298,11 +366,19 @@
           ?>
           </dl>
         </div>
+        <?php endif; ?>
+
+        <?php
+          $menu = get_post_meta($post->ID, 'menu2', true);
+          $price = get_post_meta($post->ID, 'price2', true);
+
+          // menuとpriceの両方が入力されている場合にのみテーブルを表示
+          if (!empty($menu) && !empty($price)):
+        ?>
         <div class="price-list__item">
           <h3 class="price-list__title">体験ダイビング</h3>
           <dl class="price-list__description">
           <?php
-              $trial = SCF::get('trail-diving', 12);
               if (!empty($trial)) {
                   foreach ($trial as $fields) { ?>
                       <div class="price-list__wrap">
@@ -315,11 +391,19 @@
           ?>
           </dl>
         </div>
+        <?php endif; ?>
+
+        <?php
+          $menu = get_post_meta($post->ID, 'menu3', true);
+          $price = get_post_meta($post->ID, 'price3', true);
+
+          // menuとpriceの両方が入力されている場合にのみテーブルを表示
+          if (!empty($menu) && !empty($price)):
+        ?>
         <div class="price-list__item">
           <h3 class="price-list__title">ファンダイビング</h3>
           <dl class="price-list__description">
           <?php
-              $fan = SCF::get('fan-diving', 12);
               if (!empty($fan)) {
                   foreach ($fan as $fields) { ?>
                       <div class="price-list__wrap">
@@ -332,23 +416,32 @@
           ?>
           </dl>
         </div>
-        <div class="price-list__item">
-          <h3 class="price-list__title">スペシャルダイビング</h3>
-          <dl class="price-list__description">
-          <?php
-              $special = SCF::get('special', 12);
-              if (!empty($special)) {
-                  foreach ($special as $fields) { ?>
-                      <div class="price-list__wrap">
-                          <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
-                          <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
-                      </div>
-          <?php
-                  }
-              }
-          ?>
-          </dl>
-        </div>
+        <?php endif; ?>
+
+        <?php
+          $menu = get_post_meta($post->ID, 'menu4', true);
+          $price = get_post_meta($post->ID, 'price4', true);
+
+          // menuとpriceの両方が入力されている場合にのみテーブルを表示
+          if (!empty($menu) && !empty($price)):
+        ?>
+          <div class="price-list__item">
+            <h3 class="price-list__title">スペシャルダイビング</h3>
+            <dl class="price-list__description">
+            <?php
+                if (!empty($special)) {
+                    foreach ($special as $fields) { ?>
+                        <div class="price-list__wrap">
+                            <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
+                            <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
+                        </div>
+            <?php
+                    }
+                }
+            ?>
+            </dl>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
     <div class="price__button">
@@ -356,6 +449,7 @@
         <span>View more</span>
       </a>
     </div>
+    <?php endif; ?>
   </div>
 </section>
 

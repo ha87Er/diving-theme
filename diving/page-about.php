@@ -31,6 +31,7 @@
   </div>
 </div>
 
+<?php if(get_post_meta($post->ID, 'gallery_img', true)): ?>
 <section class="gallery layout-gallery">
   <div class="gallery__inner inner">
     <div class="gallery__title title">
@@ -63,6 +64,7 @@
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <?php get_footer(); ?>
 

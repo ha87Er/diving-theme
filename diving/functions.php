@@ -174,3 +174,20 @@ function change_posts_per_page( $query ) {
 }
 add_action( 'pre_get_posts', 'change_posts_per_page' );
 
+
+add_filter( 'get_the_archive_title', function ($title) {
+  if(is_category()){
+      $title = single_cat_title('',false); //カテゴリー：を消す
+  }elseif(is_tag()){
+      $title = single_tag_title('',false);  //タグ：を消す
+  }elseif(is_date()){
+      if (is_year()) {
+          $title = get_the_time('Y年');  // 年のページの場合は年のみ表示
+      } else {
+          $title = get_the_time('Y年n月');  // 月のページの場合は年月表示
+      }
+  }
+  return $title;
+});
+
+

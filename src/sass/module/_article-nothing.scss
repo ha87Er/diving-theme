@@ -1,0 +1,13 @@
+@use 'global' as *;
+
+.article-nothing{
+    margin-top: rem(60);
+}
+
+.article-nothing__text{
+    text-align: center;
+}
+
+.article-nothing__text.article-nothing__text--white{
+    color: $white;
+}

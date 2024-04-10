@@ -16,8 +16,8 @@
     <div class="two-column__inner lower-inner inner">
       <div class="two-column__wrap">
         <div class="two-column__main">
+          <?php if (have_posts()) : // 記事があれば表示 ?>
             <div class="two-column__cards blog-items blog-items--lower-blog">
-                <?php if (have_posts()) : // 記事があれば表示 ?>
                 <?php while(have_posts()) : // 記事数分ループ ?>
                 <?php the_post(); ?>
                     <a href="<?php the_permalink(); ?>" class="lower-blog__card blog-item">
@@ -39,15 +39,17 @@
                         </div>
                     </a>
                 <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
+              </div>
+              <?php else : ?>
+                <p class="article-nothing__text">該当する記事はありません。</p>
+              <?php endif; ?>
           <!-- ページネーション -->
           <div class="layout-pagenavi">
             <?php wp_pagenavi(); ?>
           </div>
         </div>
         <!-- サイドバー -->
-        <?php get_template_part('./parts/sidebar') ?>
+        <?php get_sidebar(); ?>
       </div>
     </div>
   </div>

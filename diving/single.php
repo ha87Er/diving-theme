@@ -62,7 +62,7 @@
             <?php endif; ?>
         </div>
         <!-- サイドバー -->
-        <?php get_template_part('./parts/sidebar') ?>
+        <?php get_sidebar(); ?>
       </div>
     </div>
   </div>
