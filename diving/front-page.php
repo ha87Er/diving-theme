@@ -324,7 +324,7 @@
     $special = SCF::get('special', 12);
 
     // すべての項目が空であるかをチェック
-    if (empty($license) && empty($trial) && empty($fan) && empty($special)) :
+      if(get_field('sample',12)):
       ?>
       <div class="article-nothing">
       <p class="article-nothing__text">ただいま準備中です。</p>
