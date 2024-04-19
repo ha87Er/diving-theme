@@ -28,7 +28,7 @@
                         <?php else: ?>
                           <div class="blog-item__image">
                             <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
-                        </div>
+                          </div>
                       <?php endif; ?>
                         <div class="blog-item__body">
                             <time class="blog-item__date" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>

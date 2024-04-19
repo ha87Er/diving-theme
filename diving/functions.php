@@ -174,7 +174,7 @@ function change_posts_per_page( $query ) {
 }
 add_action( 'pre_get_posts', 'change_posts_per_page' );
 
-
+//date.phpタイトル表示
 add_filter( 'get_the_archive_title', function ($title) {
   if(is_category()){
       $title = single_cat_title('',false); //カテゴリー：を消す
@@ -189,5 +189,23 @@ add_filter( 'get_the_archive_title', function ($title) {
   }
   return $title;
 });
+
+//対象ファイルの除外
+$_theme_name = 'themes';
+
+add_filter(
+	'ai1wm_exclude_themes_from_export',
+	function ( $exclude_filters ) {
+		global $_theme_name;
+		$exclude_filters = array(
+			"{$_theme_name}/_gulp",
+			"{$_theme_name}/.git",
+			"{$_theme_name}/dist",
+			"{$_theme_name}/README.md",
+			"{$_theme_name}/src",
+		);
+		return $exclude_filters;
+	}
+);
 
 

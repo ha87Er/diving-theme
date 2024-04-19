@@ -30,98 +30,98 @@
   </div>
 
   <!-- 口コミ -->
+  <?php
+  $args = array(
+      'post_type' => 'voice', // カスタム投稿タイプのスラッグを指定
+      'posts_per_page' => 1, // 表示する投稿数を指定
+  );
+
+  $custom_query = new WP_Query($args);
+
+  if ($custom_query->have_posts()) :
+  ?>
   <div class="side__review review">
-    <div class="review__side-title">
-      <h2 class="side-title"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_bk.svg" alt="クジラのアイコン" width="50" height="50" loading="lazy"> 口コミ</h2>
-    </div>
-
-    <?php
-    $args = array(
-        'post_type' => 'voice', // カスタム投稿タイプのスラッグを指定
-        'posts_per_page' => 1, // 表示する投稿数を指定
-        'orderby' => 'date', // 日付で並び替え
-        'order' => 'DESC', // 降順で並び替え（最新の投稿を先頭に）
-    );
-
-    $custom_query = new WP_Query($args);
-
-    if ($custom_query->have_posts()) :
-        while ($custom_query->have_posts()) : $custom_query->the_post();
-            // カスタム投稿の内容を表示する部分を記述します
-    ?>
-
-    <div class="review__item review-item">
-      <div class="review-item__image">
-      <?php if(has_post_thumbnail()) : ?>
-          <?php the_post_thumbnail(); ?>
-          <?php else : ?>
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
-          <?php endif; ?>
+      <div class="review__side-title">
+          <h2 class="side-title"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_bk.svg" alt="クジラのアイコン" width="50" height="50" loading="lazy"> 口コミ</h2>
       </div>
-      <div class="review-item__body">
-        <p class="review-item__age"><?php the_field('voice_1'); ?></p>
-        <div class="review-item__title"><?php the_title(); ?></div>
+
+      <?php
+      while ($custom_query->have_posts()) : $custom_query->the_post();
+          // カスタム投稿の内容を表示する部分を記述します
+      ?>
+      <div class="review__item review-item">
+          <div class="review-item__image">
+              <?php if (has_post_thumbnail()) : ?>
+                  <?php the_post_thumbnail(); ?>
+              <?php else : ?>
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+              <?php endif; ?>
+          </div>
+          <div class="review-item__body">
+              <p class="review-item__age"><?php the_field('voice_1'); ?></p>
+              <div class="review-item__title"><?php the_title(); ?></div>
+          </div>
       </div>
-    </div>
-    <?php
-    endwhile;
-    wp_reset_postdata(); // カスタムクエリのリセット
-    endif;
-    ?>
-    <div class="review__button">
-      <a href="<?php echo get_post_type_archive_link( 'voice' ); ?>" class="button">
-        <span>View more</span>
-      </a>
-    </div>
+      <?php
+      endwhile;
+      wp_reset_postdata(); // カスタムクエリのリセット
+      ?>
+      <div class="review__button">
+          <a href="<?php echo get_post_type_archive_link('voice'); ?>" class="button">
+              <span>View more</span>
+          </a>
+      </div>
   </div>
+  <?php endif; ?>
 
   <!-- キャンペーン -->
-  <div class="side__campaign side-campaign">
-    <div class="side-campaign__title">
-      <h2 class="side-title"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_bk.svg" alt="クジラのアイコン" width="50" height="50" loading="lazy"> キャンペーン</h2>
-    </div>
+  <?php
+  $args = array(
+      'post_type' => 'campaign', // カスタム投稿タイプのスラッグを指定
+      'posts_per_page' => 2, // 表示する投稿数を指定
+  );
 
-    <div class="side-campaign__cards">
-      <?php
-      $args = array(
-          'post_type' => 'campaign', // カスタム投稿タイプのスラッグを指定
-          'posts_per_page' => 2, // 表示する投稿数を指定
-          'orderby' => 'date', // 日付で並び替え
-          'order' => 'DESC', // 降順で並び替え（最新の投稿を先頭に）
-      );
+  $custom_query = new WP_Query($args);
 
-      $custom_query = new WP_Query($args);
+  if ($custom_query->have_posts()) :
+  ?>
 
-      if ($custom_query->have_posts()) :
-          while ($custom_query->have_posts()) : $custom_query->the_post();
-              // カスタム投稿の内容を表示する部分を記述します
-      ?>
-      <div class="side-campaign__card campaign-card">
-        <div class="campaign-card__image campaign-card__image--side">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img1.jpg" alt="水槽に黄色と黒の縞模様の熱帯魚がたくさん泳いでいる">
-        </div>
-        <div class="campaign-card__body campaign-card__body--side">
-          <div class="campaign-card__title campaign-card__title--center">ライセンス取得</div>
-          <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-          <div class="campaign-card__price campaign-card__price--side">
-            <p class="campaign-card__price-before campaign-card__price-before--side"><?php the_field('campaign_1'); ?></p>
-            <p class="campaign-card__price-after campaign-card__price-after--side"><?php the_field('campaign_2'); ?></p>
-          </div>
+<div class="side__campaign side-campaign">
+  <div class="side-campaign__title">
+    <h2 class="side-title"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_bk.svg" alt="クジラのアイコン" width="50" height="50" loading="lazy"> キャンペーン</h2>
+  </div>
+
+  <div class="side-campaign__cards">
+    <?php
+      while ($custom_query->have_posts()) : $custom_query->the_post();
+          // カスタム投稿の内容を表示する部分を記述します
+    ?>
+    <div class="side-campaign__card campaign-card">
+      <div class="campaign-card__image campaign-card__image--side">
+        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/campaign_img1.jpg" alt="水槽に黄色と黒の縞模様の熱帯魚がたくさん泳いでいる">
+      </div>
+      <div class="campaign-card__body campaign-card__body--side">
+        <div class="campaign-card__title campaign-card__title--center">ライセンス取得</div>
+        <p class="campaign-card__text">全部コミコミ(お一人様)</p>
+        <div class="campaign-card__price campaign-card__price--side">
+          <p class="campaign-card__price-before campaign-card__price-before--side"><?php the_field('campaign_1'); ?></p>
+          <p class="campaign-card__price-after campaign-card__price-after--side"><?php the_field('campaign_2'); ?></p>
         </div>
       </div>
-
-      <?php
-    endwhile;
-    wp_reset_postdata(); // カスタムクエリのリセット
-    endif;
+    </div>
+    <?php
+      endwhile;
+      wp_reset_postdata(); // カスタムクエリのリセット
     ?>
-    </div>
-    <div class="side-campaign__button">
-      <a href="<?php echo get_post_type_archive_link( 'campaign' ); ?>" class="button">
-        <span>View more</span>
-      </a>
-    </div>
   </div>
+  <div class="side-campaign__button">
+    <a href="<?php echo get_post_type_archive_link('campaign'); ?>" class="button">
+      <span>View more</span>
+    </a>
+  </div>
+  <?php endif; ?>
+</div>
+
   <!-- アーカイブ -->
   <div class="side__archive archive">
     <div class="archive__title">

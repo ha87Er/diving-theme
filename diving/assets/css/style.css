@@ -800,27 +800,16 @@ a {
 }
 
 .campaign-card__image {
+	aspect-ratio: 280/188;
+	overflow: hidden;
 	position: relative;
-}
-
-.campaign-card__image.campaign-card__image--side::before {
-	padding-top: 63.945%;
-}
-
-.campaign-card__image::before {
-	content: "";
-	display: block;
-	padding-top: 66.967%;
+	width: 100%;
 }
 
 .campaign-card__image img {
 	-o-object-fit: cover;
 	height: 100%;
-	left: 50%;
 	object-fit: cover;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
 	width: 100%;
 }
 
@@ -3313,8 +3302,8 @@ html {
 	margin-top: 5.3125rem;
 }
 
-.campaign-card__image.campaign-card__image--side::before {
-	padding-top: 62.945%;
+.campaign-card__image {
+	aspect-ratio: 520/347;
 }
 
 .campaign-card__body {
