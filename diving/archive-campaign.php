@@ -31,13 +31,13 @@
           <?php the_post(); ?>
           <div class="lower-campaign__card campaign-card">
             <?php $post_id = get_the_ID(); ?>
-            <?php echo $post_id ?>
+            <!-- <?php echo $post_id ?> -->
                 <div class="campaign-card__image">
                     <?php if (has_post_thumbnail()): ?>
-                        <?php the_post_thumbnail('full', ['alt' => get_the_title() . 'のアイキャッチ']); ?>
+                        <!-- <?php the_post_thumbnail('full', ['alt' => get_the_title() . 'のアイキャッチ']); ?> -->
                         <?php echo '表示あり'?>
                     <?php else: ?>
-                        <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
+                        <!-- <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage"> -->
                         <?php echo '表示なし'?>
                     <?php endif; ?>
                 </div>
