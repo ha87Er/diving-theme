@@ -27,15 +27,17 @@
         endforeach;
         ?>
     </div>
+    <?php if (have_posts()) : // 記事があれば表示 ?>
     <div class="lower-campaign__cards">
-        <?php if (have_posts()) : // 記事があれば表示 ?>
         <?php while(have_posts()) : // 記事数分ループ ?>
         <?php the_post(); ?>
             <div class="lower-campaign__card campaign-card">
                 <div class="campaign-card__image">
-                <?php if(get_the_post_thumbnail()): ?>
-                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
-                <?php endif; ?>
+                    <?php if (has_post_thumbnail()): ?>
+                        <?php the_post_thumbnail('full', ['alt' => get_the_title() . 'のアイキャッチ']); ?>
+                    <?php else: ?>
+                        <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
+                    <?php endif; ?>
                 </div>
                 <div class="campaign-card__body campaign-card__body--lower">
                 <div>
@@ -64,8 +66,12 @@
                 </div>
             </div>
         <?php endwhile; ?>
-        <?php endif; ?>
     </div>
+    <?php else : ?>
+        <div class="article-nothing">
+          <p class="article-nothing__text">該当する記事はありません。</p>
+        </div>
+      <?php endif; ?>
     <!-- ページネーション -->
     <div class="layout-pagenavi">
         <?php wp_pagenavi(); ?>

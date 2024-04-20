@@ -31,8 +31,8 @@
         endforeach;
         ?>
       </div>
+      <?php if (have_posts()) : // 記事があれば表示 ?>
       <div class="lower-voice__cards voice-items voice-items--lower-voice">
-          <?php if (have_posts()) : // 記事があれば表示 ?>
             <?php while(have_posts()) : // 記事数分ループ ?>
             <?php the_post(); ?>
           <div class="voice-items__item voice-item">
@@ -47,8 +47,10 @@
               <h3 class="voice-item__title voice-item__title--lower"><?php the_title(); ?></h3>
             </div>
             <div class="voice-item__image colorbox inview">
-                <?php if(get_the_post_thumbnail()): ?>
+               <?php if(get_the_post_thumbnail()): ?>
                     <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+                <?php else: ?>
+                    <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
                 <?php endif; ?>
             </div>
           </div>
@@ -59,8 +61,12 @@
           </div>
         </div>
         <?php endwhile; ?>
-        <?php endif; ?>
+      </div>
+      <?php else : ?>
+        <div class="article-nothing">
+          <p class="article-nothing__text">該当する記事はありません。</p>
         </div>
+      <?php endif; ?>
 
       <!-- ページネーション -->
       <div class="layout-pagenavi">

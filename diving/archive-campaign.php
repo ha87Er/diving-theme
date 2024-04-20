@@ -30,15 +30,11 @@
         <?php while(have_posts()) : // 記事数分ループ ?>
           <?php the_post(); ?>
           <div class="lower-campaign__card campaign-card">
-            <?php $post_id = get_the_ID(); ?>
-            <!-- <?php echo $post_id ?> -->
                 <div class="campaign-card__image">
                     <?php if (has_post_thumbnail()): ?>
-                        <!-- <?php the_post_thumbnail('full', ['alt' => get_the_title() . 'のアイキャッチ']); ?> -->
-                        <?php echo '表示あり'?>
+                        <?php the_post_thumbnail('full', ['alt' => get_the_title() . 'のアイキャッチ']); ?>
                     <?php else: ?>
-                        <!-- <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage"> -->
-                        <?php echo '表示なし'?>
+                        <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
                     <?php endif; ?>
                 </div>
                 <div class="campaign-card__body campaign-card__body--lower">
