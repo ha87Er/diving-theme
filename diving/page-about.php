@@ -31,22 +31,24 @@
   </div>
 </div>
 
-<?php if(get_post_meta($post->ID, 'gallery_img', true)): ?>
+<?php if(get_field('gallery-switch',8)): ?>
+<?php else : ?>
 <section class="gallery layout-gallery">
   <div class="gallery__inner inner">
     <div class="gallery__title title">
       <div class="title__en"> Gallery</div>
       <h2 class="title__ja">フォト</h2>
     </div>
+
     <div class="gallery__image-warp">
-        <?php
-        $gallery = SCF::get('gallery');
-        foreach ($gallery as $fields) {
-        ?>
-        <div class="gallery__image js-modal-open">
-            <img src="<?php echo wp_get_attachment_url($fields['gallery_img']); ?>" alt="">
-        </div>
-        <?php } ?>
+    <?php $fields = SCF::get('gallery'); ?>
+      <?php foreach($fields as $field): ?>
+        <?php if($field['gallery_img']): ?>
+          <div class="gallery__image js-modal-open">
+              <img src="<?php echo wp_get_attachment_url($field['gallery_img']); ?>" alt="">
+          </div>
+      <?php endif; ?>
+    <?php endforeach; ?>
     </div>
 
     <!-- モーダル  -->
@@ -55,7 +57,7 @@
         <div class="modal__img">
           <?php
             // 最初のギャラリー画像のURLを取得
-            $first_gallery_img_url = wp_get_attachment_url($gallery[0]['gallery_img']);
+            $first_gallery_img_url = wp_get_attachment_url($fields[0]['gallery_img']);
             ?>
             <img src="<?php echo $first_gallery_img_url; ?>" alt="">
         </div>

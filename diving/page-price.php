@@ -15,7 +15,13 @@
 <div class="lower-price layout-lower-price">
   <div class="lower-price__inner lower-inner inner">
     <div class="lower-price__items">
-      <!-- ライセンス講習 -->
+    <?php
+    if(get_field('price-switch',12)):
+    ?>
+    <div class="article-nothing">
+      <p class="article-nothing__text">ただいま準備中です。</p>
+    </div>
+    <?php else : ?>
       <?php
       $menu = get_post_meta($post->ID, 'menu', true);
       $price = get_post_meta($post->ID, 'price', true);
@@ -30,18 +36,17 @@
               <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_white.svg" alt="クジラのアイコン" width="24" height="24" loading="lazy">ライセンス講習</p>
             </th>
           </tr>
-          <?php
-          $price1 = SCF::get('license');
-          foreach ($price1 as $fields) {
-          ?>
+          <?php $price1 = SCF::get('license'); ?>
+          <?php foreach ($price1 as $fields): ?>
           <tr>
             <td class="table__menu"><?php echo $fields['menu']; ?></td>
             <td class="table__price"><?php echo nl2br($fields['price']); ?></td>
           </tr>
-          <?php } ?>
+        <?php endforeach; ?>
         </tbody>
       </table>
       <?php endif; ?>
+
       <!-- 体験ダイビング -->
       <?php
       $menu = get_post_meta($post->ID, 'menu2', true);
@@ -57,15 +62,13 @@
               <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_white.svg" alt="クジラのアイコン" width="24" height="24" loading="lazy">体験ダイビング</p>
             </th>
           </tr>
-          <?php
-          $price2 = SCF::get('trail-diving');
-          foreach ($price2 as $fields) {
-          ?>
+          <?php $price2 = SCF::get('trail-diving'); ?>
+          <?php foreach ($price2 as $fields): ?>
           <tr>
             <td class="table__menu"><?php echo $fields['menu2']; ?></td>
             <td class="table__price"><?php echo nl2br($fields['price2']); ?></td>
           </tr>
-          <?php } ?>
+          <?php endforeach; ?>
         </tbody>
       </table>
       <?php endif; ?>
@@ -84,15 +87,13 @@
               <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_white.svg" alt="クジラのアイコン" width="24" height="24" loading="lazy">ファンダイビング</p>
             </th>
           </tr>
-          <?php
-          $price3 = SCF::get('fan-diving');
-          foreach ($price3 as $fields) {
-          ?>
+          <?php $price3 = SCF::get('fan-diving'); ?>
+          <?php foreach ($price3 as $fields): ?>
           <tr>
             <td class="table__menu"><?php echo $fields['menu3']; ?></td>
             <td class="table__price"><?php echo nl2br($fields['price3']); ?></td>
           </tr>
-          <?php } ?>
+          <?php endforeach; ?>
         </tbody>
       </table>
       <?php endif; ?>
@@ -111,29 +112,18 @@
               <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-whale_white.svg" alt="クジラのアイコン" width="24" height="24" loading="lazy">スペシャルダイビング</p>
             </th>
           </tr>
-          <?php
-          $special = SCF::get('special');
-          foreach ($special as $fields) {
-          ?>
+          <?php $special = SCF::get('special'); ?>
+          <?php foreach ($special as $fields): ?>
           <tr>
             <td class="table__menu"><?php echo $fields['menu4']; ?></td>
             <td class="table__price"><?php echo nl2br($fields['price4']); ?></td>
           </tr>
-          <?php } ?>
+          <?php endforeach; ?>
         </tbody>
       </table>
-      <?php endif; ?>
+      <?php endif ?>
     </div>
-
-    <?php
-      if (empty($price1) && empty($price2) && empty($price3) && empty($special)) {
-        echo '
-        <div class="article-nothing">
-            <p class="article-nothing__text">ただいま準備中です。</p>
-        </div>';
-      }
-    ?>
-
+  <?php endif; ?>
   </div>
 </div>
 

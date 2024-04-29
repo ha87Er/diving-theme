@@ -43,28 +43,31 @@
                     <?php echo esc_html(get_the_terms(get_the_ID(), 'campaign_category')[0]->name); ?>
                     </p>
                 </div>
+                <!-- 価格 -->
                 <div class="campaign-card__title campaign-card__title--large"><?php the_title(); ?></div>
-                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
-                  <p class="campaign-card__text campaign-card__text--lower">全部コミコミ(お一人様)</p>
-                  <?php endif; ?>
+                <?php $priceInfo = get_field('price-group'); ?>
+                <?php if($priceInfo['price-title']): ?>
+                  <p class="campaign-card__text campaign-card__text--lower"><?php echo $priceInfo['price-title']; ?></p>
+                <?php endif; ?>
                 <div class="campaign-card__price campaign-card__price--lower">
-                  <?php if(get_field('campaign_1')): ?>
-                    <p class="campaign-card__price-before campaign-card__price-before--lower"><?php the_field('campaign_1'); ?></p>
+                  <?php if($priceInfo['price1']): ?>
+                    <p class="campaign-card__price-before campaign-card__price-before--lower">¥<?php echo $priceInfo['price1']; ?></p>
                   <?php endif; ?>
-                  <?php if(get_field('campaign_2')): ?>
-                    <p class="campaign-card__price-after campaign-card__price-after--lower"><?php the_field('campaign_2'); ?></p>
-                  <?php endif; ?>
-                  <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                  <?php if($priceInfo['price2']): ?>
+                    <p class="campaign-card__price-after campaign-card__price-after--lower">¥<?php echo $priceInfo['price2']; ?></p>
                   <?php endif; ?>
                 </div>
+                <!-- 詳細 -->
                 <div class="campaign-card__description u-desktop">
-                    <?php if(get_field('campaign_3')): ?>
+                  <?php $priceDsc = get_field('description'); ?>
+                   <?php if($priceDsc['campaign-text']): ?>
                     <p class="campaign-card__description-text">
-                      <?php the_field('campaign_3'); ?>
+                      <?php echo $priceDsc['campaign-text']; ?>
                     </p>
                     <?php endif; ?>
-                    <?php if(get_field('campaign_4')): ?>
-                    <p class="campaign-card__date"><?php the_field('campaign_4'); ?></p>
+                    <?php $campaignWeek = $priceDsc['campaign-week']; ?>
+                    <?php if($campaignWeek['date-start'] && $campaignWeek['date-end']): ?>
+                    <p class="campaign-card__date"><?php echo $campaignWeek['date-start']; ?> - <?php echo $campaignWeek['date-end']; ?></p>
                     <?php endif; ?>
                     <p class="campaign-card__info">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign-card__button">

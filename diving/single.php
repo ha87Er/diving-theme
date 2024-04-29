@@ -38,14 +38,16 @@
                 <?php endif; ?>
                 <?php the_content(); ?>
             </div>
+            <?php endwhile; ?>
+            <?php endif; ?>
             <div class="article__link article-link">
               <div class="article-link__wrap">
-                  <?php
-                  $prev = get_previous_post(); //前の記事を取得
-                  $prev_url = esc_url(get_permalink($prev->ID)); //取得した情報から前の記事に飛ぶリンクを取得する
-                  $next = get_next_post(); //次の記事を取得
-                  $next_url = esc_url(get_permalink($next->ID)); //取得した情報から次の記事に飛ぶリンクを取得する
-                  ?>
+              <?php
+                $prev = get_previous_post(); //前の記事を取得
+                $prev_url = get_permalink($prev->ID); //取得した情報から前の記事に飛ぶリンクを取得する
+                $next = get_next_post(); //次の記事を取得
+                $next_url = get_permalink($next->ID); //取得した情報から次の記事に飛ぶリンクを取得する
+              ?>
                   <div class="article-link__prev">
                       <?php if ($prev): ?>
                           <a href="<?php echo $prev_url; ?>"></a>
@@ -58,8 +60,6 @@
                   </div>
               </div>
             </div>
-            <?php endwhile; ?>
-            <?php endif; ?>
         </div>
         <!-- サイドバー -->
         <?php get_sidebar(); ?>

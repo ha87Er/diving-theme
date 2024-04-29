@@ -324,7 +324,7 @@
     $special = SCF::get('special', 12);
 
     // すべての項目が空であるかをチェック
-      if(get_field('sample',12)):
+      if(get_field('price-switch',12)):
       ?>
       <div class="article-nothing">
       <p class="article-nothing__text">ただいま準備中です。</p>
@@ -348,17 +348,14 @@
         <div class="price-list__item">
           <h3 class="price-list__title">ライセンス講習</h3>
           <dl class="price-list__description">
-          <?php
-              if (!empty($license)) {
-                  foreach ($license as $fields) { ?>
-                      <div class="price-list__wrap">
-                          <dt class="price-list__menu"><?php echo $fields['menu']; ?></dt>
-                          <dd class="price-list__price"><?php echo $fields['price']; ?></dd>
-                      </div>
-          <?php
-                  }
-              }
-          ?>
+
+          <?php if (!empty($license)) ?>
+            <?php foreach ($license as $fields):  ?>
+              <div class="price-list__wrap">
+                  <dt class="price-list__menu"><?php echo $fields['menu']; ?></dt>
+                  <dd class="price-list__price"><?php echo $fields['price']; ?></dd>
+              </div>
+            <?php endforeach ?>
           </dl>
         </div>
         <?php endif; ?>
@@ -374,17 +371,13 @@
         <div class="price-list__item">
           <h3 class="price-list__title">体験ダイビング</h3>
           <dl class="price-list__description">
-          <?php
-              if (!empty($trial)) {
-                  foreach ($trial as $fields) { ?>
+          <?php if (!empty($trial)) ?>
+            <?php foreach ($trial as $fields):  ?>
                       <div class="price-list__wrap">
                           <dt class="price-list__menu"><?php echo $fields['menu2']; ?></dt>
                           <dd class="price-list__price"><?php echo $fields['price2']; ?></dd>
                       </div>
-          <?php
-                  }
-              }
-          ?>
+          <?php endforeach ?>
           </dl>
         </div>
         <?php endif; ?>
@@ -400,17 +393,13 @@
         <div class="price-list__item">
           <h3 class="price-list__title">ファンダイビング</h3>
           <dl class="price-list__description">
-          <?php
-              if (!empty($fan)) {
-                  foreach ($fan as $fields) { ?>
+          <?php if (!empty($fan)) ?>
+            <?php foreach ($fan as $fields):  ?>
                       <div class="price-list__wrap">
                           <dt class="price-list__menu"><?php echo $fields['menu3']; ?></dt>
                           <dd class="price-list__price"><?php echo $fields['price3']; ?></dd>
                       </div>
-          <?php
-                  }
-              }
-          ?>
+          <?php endforeach ?>
           </dl>
         </div>
         <?php endif; ?>
@@ -426,17 +415,13 @@
         <div class="price-list__item">
           <h3 class="price-list__title">スペシャルダイビング</h3>
           <dl class="price-list__description">
-          <?php
-              if (!empty($special)) {
-                  foreach ($special as $fields) { ?>
+          <?php if (!empty($special)) ?>
+            <?php foreach ($special as $fields):  ?>
                       <div class="price-list__wrap">
                           <dt class="price-list__menu"><?php echo $fields['menu4']; ?></dt>
                           <dd class="price-list__price"><?php echo $fields['price4']; ?></dd>
                       </div>
-          <?php
-                  }
-              }
-          ?>
+          <?php endforeach ?>
           </dl>
         </div>
        <?php endif; ?>
