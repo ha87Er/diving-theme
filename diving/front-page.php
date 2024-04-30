@@ -269,12 +269,17 @@
           <div class="voice-item__head">
             <div class="voice-item__content">
               <div class="voice-item__meta">
-              <?php $voiceInfo = get_field('voice-group'); ?>
-                <?php if(!empty($voiceInfo['age'])||!empty($voiceInfo['gender'])): ?>
-                  <p class="voice-item__age">
-                    <?php echo $voiceInfo['age'].' '.'('.$voiceInfo['gender'].')'; ?>
-                  </p>
-                  <?php endif; ?>
+              <?php
+                $voiceInfo = get_field('voice-group');
+                $genderValue = $voiceInfo['gender'];
+              ?>
+                <p class="voice-item__age">
+                  <?php if($genderValue === '選択しない' ){
+                    echo $voiceInfo['age'];
+                  }else{
+                    echo $voiceInfo['age'].' '.'('.$voiceInfo['gender'].')';
+                  } ?>
+                </p>
                 <div class="voice-item__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?></div>
               </div>
               <h3 class="voice-item__title"><?php the_title(); ?></h3>
