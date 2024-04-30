@@ -38,7 +38,7 @@
             <div class="voice-item__content">
               <div class="voice-item__meta">
                 <?php $voiceInfo = get_field('voice-group'); ?>
-                <?php if(!empty($voiceInfo['age'])||!empty($voiceInfo['age'])): ?>
+                <?php if(!empty($voiceInfo['age'])||!empty($voiceInfo['gender'])): ?>
                 <p class="voice-item__age voice-item__age--lower">
                   <?php echo $voiceInfo['age'].' '.'('.$voiceInfo['gender'].')'; ?>
                 </p>

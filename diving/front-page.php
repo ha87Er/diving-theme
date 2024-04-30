@@ -104,20 +104,21 @@
 
                 <div class="campaign-card__title"><?php the_title(); ?></div>
 
-                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
-                  <p class="campaign-card__text">全部コミコミ(お一人様)</p>
+                <?php $priceInfo = get_field('price-group'); ?>
+                <?php if(!empty($priceInfo['price1'])||!empty($priceInfo['price2'])): ?>
+                  <p class="campaign-card__text"><?php echo $priceInfo['price-title']; ?></p>
                   <div class="campaign-card__price">
                 <?php endif; ?>
 
-                <?php if(get_field('campaign_1')): ?>
-                  <p class="campaign-card__price-before"><?php the_field('campaign_1'); ?></p>
+                <?php if($priceInfo['price1']): ?>
+                  <p class="campaign-card__price-before">¥<?php echo $priceInfo['price1']; ?></p>
                 <?php endif; ?>
 
-                <?php if(get_field('campaign_2')): ?>
-                  <p class="campaign-card__price-after"><?php the_field('campaign_2'); ?></p>
+                <?php if($priceInfo['price2']): ?>
+                  <p class="campaign-card__price-after">¥<?php echo $priceInfo['price2']; ?></p>
                 <?php endif; ?>
 
-                <?php if( get_field('campaign_1') or get_field('campaign_2')): ?>
+                <?php if(!empty($priceInfo['price1'])||!empty($priceInfo['price2'])): ?>
                   </div>
                 <?php endif; ?>
               </div>
@@ -268,11 +269,12 @@
           <div class="voice-item__head">
             <div class="voice-item__content">
               <div class="voice-item__meta">
-                <p class="voice-item__age">
-                  <?php if(get_field('voice_1')): ?>
-                    <?php the_field('voice_1'); ?>
+              <?php $voiceInfo = get_field('voice-group'); ?>
+                <?php if(!empty($voiceInfo['age'])||!empty($voiceInfo['gender'])): ?>
+                  <p class="voice-item__age">
+                    <?php echo $voiceInfo['age'].' '.'('.$voiceInfo['gender'].')'; ?>
+                  </p>
                   <?php endif; ?>
-                </p>
                 <div class="voice-item__tag"><?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?></div>
               </div>
               <h3 class="voice-item__title"><?php the_title(); ?></h3>
@@ -280,14 +282,16 @@
             <div class="voice-item__image colorbox inview">
             <?php if(get_the_post_thumbnail()): ?>
                 <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ">
+            <?php else: ?>
+              <img src="<?php echo get_theme_file_uri('/assets/images/common/noimage.png'); ?>" alt="noimage">
             <?php endif; ?>
             </div>
           </div>
           <div class="voice-item__body">
             <p class="voice-item__text">
-            <?php if(get_field('voice_2')): ?>
+            <?php if($voiceInfo['voice-text']): ?>
               <?php
-                $text = mb_substr(get_field('voice_2'),0,80,'utf-8');
+                $text = mb_substr($voiceInfo['voice-text'],0,80,'utf-8');
                 echo $text.'...';
               ?>
             <?php endif; ?>
