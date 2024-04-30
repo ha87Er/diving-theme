@@ -37,11 +37,12 @@
           <div class="voice-item__head">
             <div class="voice-item__content">
               <div class="voice-item__meta">
+                <?php $voiceInfo = get_field('voice-group'); ?>
+                <?php if(!empty($voiceInfo['age'])||!empty($voiceInfo['age'])): ?>
                 <p class="voice-item__age voice-item__age--lower">
-                  <?php if(get_field('voice_1')): ?>
-                  <?php the_field('voice_1'); ?>
-                  <?php endif; ?>
+                  <?php echo $voiceInfo['age'].' '.'('.$voiceInfo['gender'].')'; ?>
                 </p>
+                <?php endif; ?>
                 <div class="voice-item__tag voice-item__tag--lower">
                     <?php echo esc_html(get_the_terms(get_the_ID(), 'voice_category')[0]->name); ?>
                 </div>
@@ -57,11 +58,11 @@
             </div>
           </div>
           <div class="voice-item__body">
+            <?php if($voiceInfo['voice-text']): ?>
             <p class="voice-item__text">
-              <?php if(get_field('voice_2')): ?>
-                <?php the_field('voice_2'); ?>
-              <?php endif; ?>
+              <?php echo $voiceInfo['voice-text']; ?>
             </p>
+            <?php endif; ?>
           </div>
         </div>
         <?php endwhile; ?>
